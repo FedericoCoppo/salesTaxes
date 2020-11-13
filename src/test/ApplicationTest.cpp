@@ -6,6 +6,7 @@
 *******************************************************************************/
 
 #include <assert.h>
+#include <math.h>
 #include "applicationTest.h"
 
 // Const
@@ -32,7 +33,6 @@ void ApplicationTest::Test(void)
 	Product p2("dog");
 	Product p3("imported chocolates");
 
-
 	// create the shopping chart
 	Basket b1;
 
@@ -48,7 +48,7 @@ void ApplicationTest::Test(void)
 	{
 		Product * p = b1.GetProduct(i);
 
-		// Utest 2: check if all imported product are correctly marked
+		// UTest 2: check if all imported product are correctly marked
 		if ((p->GetName().find("imported") == 0))
 		{
 			assert(b1.GetProduct(i)->GetImported() == true);
@@ -57,6 +57,44 @@ void ApplicationTest::Test(void)
 		{
 			assert(p->GetImported() == false);
 		}
+
+		// UTest 3: check taxes calculation
+
+		// price check
+		assert(p->GetPrice() > 0.0);
+
+		// test taxes taxes
+		float taxPercentage_x100 = 0.0;
+
+		if (!p->GetIsBasicSalesTaxed() && !p->GetImported())
+		{
+			// no taxes
+			taxPercentage_x100 = 0.0;
+		}
+		else if (p->GetIsBasicSalesTaxed() && p->GetImported())
+		{
+			// both taxes 10% and 5%
+			taxPercentage_x100 = 0.15;
+		}
+		else if (p->GetIsBasicSalesTaxed())
+		{
+			// basic tax
+			taxPercentage_x100 = 0.10;
+		}
+		else
+		{
+			// import tax
+			taxPercentage_x100 = 0.05;
+		}
+
+		// calculate the tax
+		float testTax = p->GetPrice()*taxPercentage_x100;
+
+		// round up to the nearest 0.05
+		testTax = ceil(testTax*20)*0.05;
+
+		// compare with product tax field
+		assert( ( int (p->GetTaxes()*100) == int (testTax*100) ));
 	}
 }
 
