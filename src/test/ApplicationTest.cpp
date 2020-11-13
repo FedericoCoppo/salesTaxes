@@ -36,14 +36,27 @@ void ApplicationTest::Test(void)
 	// create the shopping chart
 	Basket b1;
 
-	/*
 	app_pt->ChooseProduct(&p1,&b1);
 	app_pt->ChooseProduct(&p2,&b1);
 	app_pt->ChooseProduct(&p3,&b1);
-	*/
+
 
 	// UTest 1: check product has been correctly added in the basket
 	assert (b1.GetBasketSize() == 3);
 
+	for (int i = 0; i < b1.GetBasketSize(); i++)
+	{
+		Product * p = b1.GetProduct(i);
+
+		// Utest 2: check if all imported product are correctly marked
+		if ((p->GetName().find("imported") == 0))
+		{
+			assert(b1.GetProduct(i)->GetImported() == true);
+		}
+		else
+		{
+			assert(p->GetImported() == false);
+		}
+	}
 }
 
