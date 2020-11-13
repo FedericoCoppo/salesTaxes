@@ -40,6 +40,8 @@ void ApplicationTest::Test(void)
 	app_pt->ChooseProduct(&p2,&b1);
 	app_pt->ChooseProduct(&p3,&b1);
 
+	float totalPrice = 0.0;
+
 
 	// UTest 1: check product has been correctly added in the basket
 	assert (b1.GetBasketSize() == 3);
@@ -95,6 +97,22 @@ void ApplicationTest::Test(void)
 
 		// compare with product tax field
 		assert( ( int (p->GetTaxes()*100) == int (testTax*100) ));
+
+		totalPrice += p->GetPrice();
 	}
+
+	// UTest4: Receipt test
+	ReceiptGenerator * p_receipt = new ReceiptGenerator(&b1);
+
+	// receipt should be on amount
+	assert(p_receipt->GetTotal() > 0);
+
+	//negative taxes are not allowed
+	assert(p_receipt->GetTotalSalesTaxes() >= 0);
+
+	// the receipt total minus the taxes should be equal the sum of products's prices
+	assert( (int) (totalPrice + p_receipt->GetTotalSalesTaxes())*100 ==  (int) p_receipt->GetTotal()*100);
+
+	delete p_receipt;
 }
 

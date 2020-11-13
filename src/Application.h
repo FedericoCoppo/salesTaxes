@@ -12,6 +12,7 @@
 #include <string>
 #include "Product.h"
 #include "Basket.h"
+#include "ReceiptGenerator.h"
 
 using namespace std;
 
