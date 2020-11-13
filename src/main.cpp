@@ -7,13 +7,25 @@
 
 // include
 
-#include <iostream>
 #include "main.h"
 
 using namespace std;
 
 int main()
 {
+#ifdef TEST_APPLICATION
+
+	// testing application
+	ApplicationTest * testApp_pt = new ApplicationTest();
+	testApp_pt->Test();
+	delete testApp_pt;
+#else
+	// release application
+
+
+#endif
+
 
 	return 0;
 }
+
