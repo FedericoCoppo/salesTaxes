@@ -19,6 +19,7 @@ int main()
 	ApplicationTest * testApp_pt = new ApplicationTest();
 	testApp_pt->Test();
 	delete testApp_pt;
+
 #else
 	// release application
 

@@ -27,6 +27,23 @@ ApplicationTest::~ApplicationTest(void)
 // Main test routine for application class
 void ApplicationTest::Test(void)
 {
+	// create product (to be done by future store class)
+	Product p1("chocolates");
+	Product p2("dog");
+	Product p3("imported chocolates");
+
+
+	// create the shopping chart
+	Basket b1;
+
+	/*
+	app_pt->ChooseProduct(&p1,&b1);
+	app_pt->ChooseProduct(&p2,&b1);
+	app_pt->ChooseProduct(&p3,&b1);
+	*/
+
+	// UTest 1: check product has been correctly added in the basket
+	assert (b1.GetBasketSize() == 3);
 
 }
 
