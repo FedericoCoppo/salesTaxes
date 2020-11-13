@@ -104,8 +104,8 @@ void ApplicationTest::Test(void)
 	// UTest4: Receipt test
 	ReceiptGenerator * p_receipt = new ReceiptGenerator(&b1);
 
-	// receipt should be on amount
-	assert(p_receipt->GetTotal() > 0);
+	// receipt amount
+	assert(p_receipt->GetTotal() >= 0);
 
 	//negative taxes are not allowed
 	assert(p_receipt->GetTotalSalesTaxes() >= 0);
