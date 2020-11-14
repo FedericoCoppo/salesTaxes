@@ -99,7 +99,10 @@ void ApplicationTest::Test(void)
 		// compare with product tax field
 		assert( ( int (p->GetTaxes()*100) == int (testTax*100) ));
 
-		totalPrice += p->GetPrice();
+		for (int j = 0; j < p->GetProductNumber(); j++)
+		{
+			totalPrice += p->GetPrice();
+		}
 	}
 
 	// UTest4: Receipt test
@@ -113,7 +116,7 @@ void ApplicationTest::Test(void)
 	assert(p_receipt->GetTotalSalesTaxes() >= 0);
 
 	// the receipt total minus the taxes should be equal the sum of products's prices
-	//assert( (int) (totalPrice + p_receipt->GetTotalSalesTaxes())*100 ==  (int) p_receipt->GetTotal()*100);
+	assert( (int) (totalPrice + p_receipt->GetTotalSalesTaxes())*100 ==  (int) p_receipt->GetTotal()*100);
 
 	p_receipt->PrintReceipt();
 
