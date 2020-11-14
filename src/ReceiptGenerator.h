@@ -16,8 +16,8 @@ class ReceiptGenerator
 public:
 	ReceiptGenerator(Basket * pt_basket);
 	virtual ~ReceiptGenerator();
-	void PrintReceipt ();
 	void CalculateReceipt ();
+	void PrintReceipt ();
 	float GetTotal() {return total;}
 	float GetTotalSalesTaxes() {return totalSalesTaxes;}
 
@@ -26,6 +26,9 @@ private:
 	Basket * p_basket;
 	float totalSalesTaxes;
 	float total;
+
+	void printLine(string s);
+	void printString(string s);
 };
 
 #endif /* RECEIPTGENERATOR_H_ */
