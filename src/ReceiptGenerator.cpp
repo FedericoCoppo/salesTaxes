@@ -57,7 +57,15 @@ void ReceiptGenerator::PrintReceipt ()
 
 		for (int i = 0; i < p_basket->GetBasketSize(); i++)
 		{
+			// number
+			std::stringstream streamNumberOfProduct;
+			streamNumberOfProduct << std::fixed << std::setprecision(2) << p_basket->GetProduct(i)->GetProductNumber();
+			printString(streamNumberOfProduct.str() + " ");
+
+			// name
 			printString(p_basket->GetProduct(i)->GetName() + ": ");
+
+			// price
 			std::stringstream streamTaxedPrice;
 			streamTaxedPrice << std::fixed << std::setprecision(2) << p_basket->GetProduct(i)->GetTaxedPrice();
 			printLine(streamTaxedPrice.str());
