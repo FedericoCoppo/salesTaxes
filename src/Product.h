@@ -36,6 +36,7 @@ public:
 	float GetPrice() { return price; }
 	float GetTaxes() { return taxes; }
 	float GetIsBasicSalesTaxed() { return isBasicSalesTaxed; }
+	float GetTaxedPrice() { return taxedPrice; }
 
 private:
 	void parseInputLine (void);
@@ -51,6 +52,7 @@ private:
 	string name;
 	int productNumber;
 	float price;
+	float taxedPrice;
 	float taxes;
 	float taxesPct;
 	bool isImported;

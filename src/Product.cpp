@@ -22,6 +22,7 @@ Product::Product(const char * p_line, taxCategory cat)
 	category = cat;
 
 	price = 0.0;
+	taxedPrice = price;
 	taxes = 0.0;
 	taxesPct = 0.0;
 	productNumber = 1;
@@ -93,6 +94,8 @@ float Product::calculateTaxes()
 		rawTaxes = taxesPct*price;
 		taxes += roundUpTo05(rawTaxes);
 	}
+
+	taxedPrice = price*productNumber + taxes;
 
 	return taxes;
 }
