@@ -2,30 +2,31 @@
 	File        : Basket.cpp
 	Date        : 13/11/2020
 	Author      : Federico Coppo
-	Description : Basket class
+	Description : Basket class:
+				  it represents a shopping card ready for receipt
 *******************************************************************************/
 
 #include "Basket.h"
 
-// Const
+// Const.
 Basket::Basket(void)
 {
 
 }
 
-
-// Dest
+// Dest.
 Basket::~Basket(void)
 {
-
+	productList.clear();
 }
 
-// print method with stdout flush
+// Add a new product to shopping basket
 void Basket::AddProductToBasket(Product * pt)
 {
    productList.push_back(*pt);
 }
 
+// Get product at specific index
 Product * Basket::GetProduct (int idx)
 {
 	if (idx < GetBasketSize())
