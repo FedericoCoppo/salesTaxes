@@ -29,16 +29,17 @@ ApplicationTest::~ApplicationTest(void)
 void ApplicationTest::Test(void)
 {
 	// create product (to be done by future store class)
-	Product p1("chocolates");
-	Product p2("dog");
-	Product p3("imported chocolates");
+	Product p1("2 book at 12.49", Product::taxCategory::book);
+	Product p2("1 music CD at 14.99", Product::taxCategory::genericProduct);
+	Product p3("1 chocolate bar at 0.85", Product::taxCategory::food);
+
 
 	// create the shopping chart
 	Basket b1;
 
-	app_pt->ChooseProduct(&p1,&b1);
-	app_pt->ChooseProduct(&p2,&b1);
-	app_pt->ChooseProduct(&p3,&b1);
+	app_pt->KeepProduct(&p1,&b1);
+	app_pt->KeepProduct(&p2,&b1);
+	app_pt->KeepProduct(&p3,&b1);
 
 	float totalPrice = 0.0;
 
@@ -51,13 +52,13 @@ void ApplicationTest::Test(void)
 		Product * p = b1.GetProduct(i);
 
 		// UTest 2: check if all imported product are correctly marked
-		if ((p->GetName().find("imported") == 0))
+		if ((p->GetName().find("imported") != std::string::npos))
 		{
-			assert(b1.GetProduct(i)->GetImported() == true);
+			assert(b1.GetProduct(i)->GetIsImported() == true);
 		}
 		else
 		{
-			assert(p->GetImported() == false);
+			assert(p->GetIsImported() == false);
 		}
 
 		// UTest 3: check taxes calculation
@@ -68,12 +69,12 @@ void ApplicationTest::Test(void)
 		// test taxes taxes
 		float taxPercentage_x100 = 0.0;
 
-		if (!p->GetIsBasicSalesTaxed() && !p->GetImported())
+		if (!p->GetIsBasicSalesTaxed() && !p->GetIsImported())
 		{
 			// no taxes
 			taxPercentage_x100 = 0.0;
 		}
-		else if (p->GetIsBasicSalesTaxed() && p->GetImported())
+		else if (p->GetIsBasicSalesTaxed() && p->GetIsImported())
 		{
 			// both taxes 10% and 5%
 			taxPercentage_x100 = 0.15;
