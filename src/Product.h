@@ -2,40 +2,60 @@
 	File        : Product.h
 	Date        : 13/11/2020
 	Author      : Federico Coppo
-	Description : Product header
+	Description : Product class header
 *******************************************************************************/
 
 #ifndef PRODUCT_H_
 #define PRODUCT_H_
 
+// include
 #include <string>
+
 using namespace std;
 
-// Class that implement a store Product
+// Class that implement a Store Product
 class Product
 {
 public:
-	Product(const char * name);
+
+	typedef enum
+	{
+		food,
+		book,
+		medicine,
+		genericProduct
+
+	} taxCategory;
+
+	Product(const char * p_line, taxCategory cat);
 	virtual ~Product(void);
 
 	// Getter
-	string GetName() { return (string) p_name;}
-	bool GetImported() {return imported;}
+	string GetName() { return name;}
+	bool GetIsImported() {return isImported;}
 	float GetPrice() { return price; }
 	float GetTaxes() { return taxes; }
 	float GetIsBasicSalesTaxed() { return isBasicSalesTaxed; }
 
-
 private:
+	void parseInputLine (void);
+
+	// taxes calculation
 	float calculateTaxes();
+	float roundUpTo05(float num);
+
+	// taxes value update
 	void setTaxes(float t) {taxes = t;}
 
-	const char * p_name;
+	string inputString;
+	string name;
+	int productNumber;
 	float price;
 	float taxes;
-	bool imported;
+	float taxesPct;
+	bool isImported;
 	bool isBasicSalesTaxed;
-
+	taxCategory category;
 };
 
 #endif /* PRODUCT_H_ */
