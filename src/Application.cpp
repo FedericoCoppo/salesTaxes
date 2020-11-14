@@ -2,32 +2,30 @@
 	File        : Application.cpp
 	Date        : 13/11/2020
 	Author      : Federico Coppo
-	Description : Application routine
+	Description : Application class header
 *******************************************************************************/
 
 // include
 #include "Application.h"
 
-
-// Const
+// Const.
 Application::Application(void)
 {
 
 }
 
-
-// Dest
+// Dest.
 Application::~Application(void)
 {
 
 }
 
-void Application::ChooseProduct(Product * p_product, Basket * p_basket)
+void Application::KeepProduct(Product * p_product, Basket * p_basket)
 {
 	p_basket->AddProductToBasket(p_product);
 }
 
-// print method with stdout flush
+// Print method with standard output flush for char *
 void Application::PrintLine(const char * pt)
 {
 	string s = pt;
@@ -35,7 +33,7 @@ void Application::PrintLine(const char * pt)
 	fflush(stdout);
 }
 
-// print method with stdout flush
+// // Print method with standard output flush for string
 void Application::PrintString(string s)
 {
 	std::cout << s + "\n";

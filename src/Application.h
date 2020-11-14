@@ -8,22 +8,25 @@
 #ifndef APPLICATION_H_
 #define APPLICATION_H_
 
+// include
 #include <iostream>
 #include <string>
+
 #include "Product.h"
 #include "Basket.h"
 #include "ReceiptGenerator.h"
 
+
 using namespace std;
 
-// Class that implement the main application
+// Class that implement the Application
 class Application
 {
 public:
-
 	Application(void);
 	virtual ~Application(void);
-	void ChooseProduct(Product * p_product, Basket * p_basket);
+	void KeepProduct(Product * p_product, Basket * p_basket);
+
 	void PrintLine(const char * pt);
 	void PrintString(string s);
 
