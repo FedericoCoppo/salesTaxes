@@ -88,11 +88,12 @@ void Product::parseInputLine (void)
 float Product::calculateTaxes()
 {
 	float rawTaxes;
-
+	float roundedTaxes;
 	for (int i = 0; i < productNumber; i++ )
 	{
 		rawTaxes = taxesPct*price;
-		taxes += roundUpTo05(rawTaxes);
+		roundedTaxes = roundUpTo05(rawTaxes);
+		taxes += roundedTaxes;
 	}
 
 	taxedPrice = price*productNumber + taxes;
