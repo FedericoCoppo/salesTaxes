@@ -9,6 +9,8 @@
 #include <math.h>
 #include "applicationTest.h"
 
+#define USER 2
+
 // Const
 ApplicationTest::ApplicationTest(void)
 {
@@ -28,24 +30,60 @@ ApplicationTest::~ApplicationTest(void)
 // Main test routine for application class
 void ApplicationTest::Test(void)
 {
-	// create product (to be done by future store class)
-	Product p1("2 book at 12.49", Product::taxCategory::book);
-	Product p2("1 music CD at 14.99", Product::taxCategory::genericProduct);
-	Product p3("1 chocolate bar at 0.85", Product::taxCategory::food);
-
+	int productObj;
 
 	// create the shopping chart
 	Basket b1;
 
-	app_pt->KeepProduct(&p1,&b1);
-	app_pt->KeepProduct(&p2,&b1);
-	app_pt->KeepProduct(&p3,&b1);
+	// create product (to be done by future store class)
+	if (USER == 1)
+	{
+		Product p1("2 book at 12.49", Product::taxCategory::book);
+		Product p2("1 music CD at 14.99", Product::taxCategory::genericProduct);
+		Product p3("1 chocolate bar at 0.85", Product::taxCategory::food);
+		app_pt->KeepProduct(&p1,&b1);
+		app_pt->KeepProduct(&p2,&b1);
+		app_pt->KeepProduct(&p3,&b1);
+		productObj = 3;
+	}
+	else if (USER == 2)
+	{
+		Product p1("1 imported box of chocolates at 10.00", Product::taxCategory::food);
+		Product p2("1 imported bottle of perfume at 47.50", Product::taxCategory::genericProduct);
+		app_pt->KeepProduct(&p1,&b1);
+		app_pt->KeepProduct(&p2,&b1);
+		productObj = 2;
+	}
+	else if (USER == 3)
+	{
+		Product p1("1 imported bottle of perfume at 27.99", Product::taxCategory::genericProduct);
+		Product p2("1 bottle of perfume at 18.99", Product::taxCategory::genericProduct);
+		Product p3("1 packet of headache pills at 9.75", Product::taxCategory::medicine);
+		Product p4("3 box of imported chocolates at 11.25", Product::taxCategory::food);
+		app_pt->KeepProduct(&p1,&b1);
+		app_pt->KeepProduct(&p2,&b1);
+		app_pt->KeepProduct(&p3,&b1);
+		app_pt->KeepProduct(&p4,&b1);
+		productObj = 4;
+	}
+	else
+	{
+		// other user
+		Product p1("1 imported bottle of perfume at 27.99", Product::taxCategory::genericProduct);
+		Product p2("1 bottle of perfume at 18.99", Product::taxCategory::genericProduct);
+		Product p3("1 packet of headache pills at 9.75", Product::taxCategory::medicine);
+		Product p4("3 box of imported chocolates at 11.25", Product::taxCategory::food);
+		app_pt->KeepProduct(&p1,&b1);
+		app_pt->KeepProduct(&p2,&b1);
+		app_pt->KeepProduct(&p3,&b1);
+		app_pt->KeepProduct(&p4,&b1);
+		productObj = 4;
+	}
 
 	float totalPrice = 0.0;
 
-
-	// UTest 1: check product has been correctly added in the basket
-	assert (b1.GetBasketSize() == 3);
+	// UTest 1: check "Product" object has been correctly added in the basket
+	assert (b1.GetBasketSize() == productObj);
 
 	for (int i = 0; i < b1.GetBasketSize(); i++)
 	{
@@ -95,6 +133,9 @@ void ApplicationTest::Test(void)
 
 		// round up to the nearest 0.05
 		testTax = ceil(testTax*20)*0.05;
+
+		// consider the number of that product
+		testTax *= p->GetProductNumber();
 
 		// compare with product tax field
 		assert( ( int (p->GetTaxes()*100) == int (testTax*100) ));
