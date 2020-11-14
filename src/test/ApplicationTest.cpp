@@ -9,7 +9,7 @@
 #include <math.h>
 #include "applicationTest.h"
 
-#define USER 2
+#define USER 4
 
 // Const
 ApplicationTest::ApplicationTest(void)
@@ -68,11 +68,11 @@ void ApplicationTest::Test(void)
 	}
 	else
 	{
-		// other user
-		Product p1("1 imported bottle of perfume at 27.99", Product::taxCategory::genericProduct);
-		Product p2("1 bottle of perfume at 18.99", Product::taxCategory::genericProduct);
-		Product p3("1 packet of headache pills at 9.75", Product::taxCategory::medicine);
-		Product p4("3 box of imported chocolates at 11.25", Product::taxCategory::food);
+		// other
+		Product p1("1 imported box of chocolates at 10.50", Product::taxCategory::food);
+		Product p2("1 imported bottle of perfume at 54.65", Product::taxCategory::genericProduct);
+		Product p3("2 book at 12.49", Product::taxCategory::book);
+		Product p4("15 box of imported chocolate at 11", Product::taxCategory::food);
 		app_pt->KeepProduct(&p1,&b1);
 		app_pt->KeepProduct(&p2,&b1);
 		app_pt->KeepProduct(&p3,&b1);
