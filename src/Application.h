@@ -13,6 +13,9 @@
 #include <string>
 
 #include "Product.h"
+#include "Food.h"
+#include "Book.h"
+#include "Medicine.h"
 #include "Basket.h"
 #include "Receipt.h"
 #include "ShoppingSheetList.h"

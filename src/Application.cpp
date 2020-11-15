@@ -49,19 +49,16 @@ void Application::FillBasketFromShoppingList(ShoppingSheetList *p_shopList, Bask
 				switch (p_shopNoteTmp->GetShoppingNoteCategory())
 				{
 				case ShoppingNote::productCategory::book:
-					p_productTmp= new Product(prodName, prodNum, prodPrice, Product::book);
+					p_productTmp = new Book(prodName, prodNum, prodPrice);
 					break;
-
 				case ShoppingNote::productCategory::food:
-					p_productTmp= new Product(prodName, prodNum, prodPrice, Product::book);
+					p_productTmp = new Food(prodName, prodNum, prodPrice);
 					break;
-
 				case ShoppingNote::productCategory::medicine:
-					p_productTmp= new Product(prodName, prodNum, prodPrice, Product::book);
+					p_productTmp = new Medicine(prodName, prodNum, prodPrice);
 					break;
-
 				case ShoppingNote::productCategory::genericProduct:
-					p_productTmp= new Product(prodName, prodNum, prodPrice, Product::genericProduct);
+					p_productTmp = new Product(prodName, prodNum, prodPrice);
 					break;
 				}
 
@@ -74,6 +71,7 @@ void Application::FillBasketFromShoppingList(ShoppingSheetList *p_shopList, Bask
 	}
 }
 
+// Application validate shopping list note before creating a new product
 bool Application::validateShoppingNote(string s, int * p_number, string * p_name, float * p_price)
 {
 	bool res = true;
@@ -129,7 +127,7 @@ void Application::PrintLine(const char * pt)
 	fflush(stdout);
 }
 
-// // Print method with standard output flush for string
+// Print method with standard output flush for string
 void Application::PrintString(string s)
 {
 	std::cout << s + "\n";
