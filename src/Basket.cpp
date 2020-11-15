@@ -21,7 +21,7 @@ Basket::~Basket(void)
 }
 
 // Add a new product to shopping basket
-void Basket::AddProductToBasket(Product * pt)
+void Basket::AddProductToBasket(GenericProduct * pt)
 {
 	if (pt)
 	{
@@ -30,11 +30,11 @@ void Basket::AddProductToBasket(Product * pt)
 }
 
 // Get product at specific index
-Product * Basket::GetProduct (int idx)
+GenericProduct * Basket::GetProduct (int idx)
 {
 	if (idx < GetBasketSize())
 	{
-	    list<Product>::iterator it = productList.begin();
+	    list<GenericProduct>::iterator it = productList.begin();
 	    for(int i=0; i< idx; i++)
 	    {
 	        ++it;

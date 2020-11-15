@@ -12,7 +12,7 @@
 #include <iostream>
 #include <string>
 
-#include "Product.h"
+#include "GenericProduct.h"
 #include "Food.h"
 #include "Book.h"
 #include "Medicine.h"

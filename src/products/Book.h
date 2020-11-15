@@ -9,10 +9,10 @@
 #define BOOK_H_
 
 // include
-#include "Product.h"
+#include "GenericProduct.h"
 
 // Class that implements the Book product
-class Book : public Product
+class Book : public GenericProduct
 {
 public:
 	Book(string name, int num, float price);

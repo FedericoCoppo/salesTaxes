@@ -9,10 +9,10 @@
 #define MEDICINE_H_
 
 // include
-#include "Product.h"
+#include "GenericProduct.h"
 
 // Class that implements the Medicine product
-class Medicine : public Product
+class Medicine : public GenericProduct
 {
 public:
 	Medicine(string name, int num, float price);

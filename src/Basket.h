@@ -12,7 +12,7 @@ using namespace std;
 
 // include
 #include <list>
-#include "Product.h"
+#include "GenericProduct.h"
 
 // Class that implement a shopping cart
 class Basket
@@ -20,14 +20,14 @@ class Basket
 public:
 	Basket(const char * p_name);
 	virtual ~Basket(void);
-	void AddProductToBasket(Product * pt);
+	void AddProductToBasket(GenericProduct * pt);
 
 	// Getter
 	int GetBasketSize(){ return productList.size(); }
-	Product * GetProduct (int idx);
+	GenericProduct * GetProduct (int idx);
 	const char * GetName() { return pt_name; }
 private:
-	list <Product> productList;
+	list <GenericProduct> productList;
 	const char * pt_name;
 };
 

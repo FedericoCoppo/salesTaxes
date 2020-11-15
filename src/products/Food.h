@@ -9,10 +9,10 @@
 #define FOOD_H_
 
 // include
-#include "Product.h"
+#include "GenericProduct.h"
 
 // Class that implements the Food product
-class Food : public Product
+class Food : public GenericProduct
 {
 public:
 	Food(string name, int num, float price);

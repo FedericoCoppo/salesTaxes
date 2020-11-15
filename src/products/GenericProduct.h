@@ -1,12 +1,12 @@
 /*******************************************************************************
-	File        : Product.h
+	File        : GenericProduct.h
 	Date        : 13/11/2020
 	Author      : Federico Coppo
-	Description : Product class header
+	Description : GenericProduct class header
 *******************************************************************************/
 
-#ifndef PRODUCT_H_
-#define PRODUCT_H_
+#ifndef GENERICPRODUCT_H_
+#define GENERICPRODUCT_H_
 
 // include
 #include <string>
@@ -14,11 +14,11 @@
 using namespace std;
 
 // Class that implement a Store Product
-class Product
+class GenericProduct
 {
 public:
-	Product(string prodName, int prodNum, float prodPrice);
-	virtual ~Product(void);
+	GenericProduct(string prodName, int prodNum, float prodPrice);
+	virtual ~GenericProduct(void);
 	float CalculateTaxes();
 
 	// Getter
@@ -46,4 +46,4 @@ private:
 	bool taxesAlreadyCalculated;
 };
 
-#endif /* PRODUCT_H_ */
+#endif /* GENERICPRODUCT_H_ */

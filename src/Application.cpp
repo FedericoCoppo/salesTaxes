@@ -30,7 +30,7 @@ Application::~Application(void)
 void Application::FillBasketFromShoppingList(ShoppingSheetList *p_shopList, Basket * p_basket)
 {
 	ShoppingNote * p_shopNoteTmp;
-	Product * p_productTmp;
+	GenericProduct * p_productTmp;
 
 	for (int i = 0; i < p_shopList->GetShoppingNoteListSize(); i++)
 	{
@@ -58,7 +58,7 @@ void Application::FillBasketFromShoppingList(ShoppingSheetList *p_shopList, Bask
 					p_productTmp = new Medicine(prodName, prodNum, prodPrice);
 					break;
 				case ShoppingNote::productCategory::genericProduct:
-					p_productTmp = new Product(prodName, prodNum, prodPrice);
+					p_productTmp = new GenericProduct(prodName, prodNum, prodPrice);
 					break;
 				}
 

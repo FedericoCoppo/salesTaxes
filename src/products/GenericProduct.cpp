@@ -1,8 +1,8 @@
 /*******************************************************************************
-	File        : Product.cpp
+	File        : GenericProduct.cpp
 	Date        : 13/11/2020
 	Author      : Federico Coppo
-	Description : Product class:
+	Description : GenericProduct class:
 				  it represent the store product with all purchase information
 *******************************************************************************/
 
@@ -11,12 +11,12 @@
 #include <iostream>
 #include <Math.h>
 
-#include "Product.h"
+#include "GenericProduct.h"
 
 using namespace std;
 
 // Const.
-Product::Product(string prodName, int prodNum, float prodPrice)
+GenericProduct::GenericProduct(string prodName, int prodNum, float prodPrice)
 {
 	name = prodName;
 	price = prodPrice;
@@ -30,7 +30,7 @@ Product::Product(string prodName, int prodNum, float prodPrice)
 }
 
 // Dest.
-Product::~Product(void)
+GenericProduct::~GenericProduct(void)
 {
 	price = 0.0;
 	taxes = 0.0;
@@ -39,7 +39,7 @@ Product::~Product(void)
 }
 
 // sales tax calculation routine
-float Product::CalculateTaxes()
+float GenericProduct::CalculateTaxes()
 {
 	if (!taxesAlreadyCalculated)
 	{
@@ -74,7 +74,7 @@ float Product::CalculateTaxes()
 	return taxes;
 }
 
-float Product::roundUpTo05(float num)
+float GenericProduct::roundUpTo05(float num)
 {
 	return ceil(num*20)/20;
 }

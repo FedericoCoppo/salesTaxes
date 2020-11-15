@@ -11,7 +11,7 @@
 
 // Constructor
 Book::Book(string name, int num, float price):
-Product(name, num, price)
+GenericProduct(name, num, price)
 {
 	isBasicSalesTaxed = false;
 }

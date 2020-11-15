@@ -82,7 +82,7 @@ void ApplicationTest::testCalculatedTaxeValues()
 {
 	for (int i = 0; i < p_basket->GetBasketSize(); i++)
 	{
-		Product * p = p_basket->GetProduct(i);
+		GenericProduct * p = p_basket->GetProduct(i);
 		p->CalculateTaxes();
 
 		// test for multiple taxes calculation on same product
@@ -144,7 +144,7 @@ void ApplicationTest::testReceiptTaxeValues()
 
 	for (int i = 0; i < p_basket->GetBasketSize(); i++)
 	{
-		Product * p = p_basket->GetProduct(i);
+		GenericProduct * p = p_basket->GetProduct(i);
 		for (int j = 0; j < p->GetProductNumber(); j++)
 		{
 			totalPrice += p->GetPrice();
