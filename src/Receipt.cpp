@@ -1,5 +1,5 @@
 /*******************************************************************************
-	File        : ReceiptGenerator.cpp
+	File        : Receipt.cpp
 	Date        : 13/11/2020
 	Author      : Federico Coppo
 	Description : Receipt generator class
@@ -8,30 +8,27 @@
 // include
 #include <iostream>
 #include <string>
-
 #include <sstream>
 #include <iomanip>
 
-
-#include "ReceiptGenerator.h"
+#include "Receipt.h"
 
 // Const
-ReceiptGenerator::ReceiptGenerator(Basket * pt_basket)
+Receipt::Receipt(Basket * pt_basket)
 {
 	p_basket = pt_basket;
 	totalSalesTaxes = 0;
 	total = 0;
-
 }
 
 // Dest
-ReceiptGenerator::~ReceiptGenerator(void)
+Receipt::~Receipt(void)
 {
 	p_basket = NULL;
 }
 
 // Calculate total and cumulative taxes
-void ReceiptGenerator::CalculateReceipt(void)
+void Receipt::CalculateReceipt(void)
 {
 	if (p_basket)
 	{
@@ -43,12 +40,12 @@ void ReceiptGenerator::CalculateReceipt(void)
 	}
 }
 
-
 // Print basket's receipt
-void ReceiptGenerator::PrintReceipt ()
+void Receipt::PrintReceipt ()
 {
 	if (p_basket)
 	{
+		printLine(p_basket->GetName());
 
 		std::stringstream streamTotalTaxes;
 		streamTotalTaxes << std::fixed << std::setprecision(2) << totalSalesTaxes;
@@ -79,13 +76,13 @@ void ReceiptGenerator::PrintReceipt ()
 }
 
 // Print a line with standard output flush for string
-void ReceiptGenerator::printLine(string s)
+void Receipt::printLine(string s)
 {
 	std::cout << s + "\n";
 	fflush(stdout);
 }
 // Print a string with standard output flush for string
-void ReceiptGenerator::printString(string s)
+void Receipt::printString(string s)
 {
 	std::cout << s;
 	fflush(stdout);

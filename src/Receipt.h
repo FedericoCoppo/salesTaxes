@@ -1,5 +1,5 @@
 /*******************************************************************************
-	File        : ReceiptGenerator.h
+	File        : Receipt.h
 	Date        : 13/11/2020
 	Author      : Federico Coppo
 	Description : Receipt generator class header
@@ -11,24 +11,23 @@
 #include "Basket.h"
 
 // Class that implement a Receipt
-class ReceiptGenerator
+class Receipt
 {
 public:
-	ReceiptGenerator(Basket * pt_basket);
-	virtual ~ReceiptGenerator();
-	void CalculateReceipt ();
-	void PrintReceipt ();
-	float GetTotal() {return total;}
-	float GetTotalSalesTaxes() {return totalSalesTaxes;}
-
+	Receipt(Basket * pt_basket);
+	virtual ~Receipt();
+	void CalculateReceipt();
+	void PrintReceipt();
+	float GetTotal() { return total; }
+	float GetTotalSalesTaxes() { return totalSalesTaxes; }
 
 private:
+	void printLine(string s);
+	void printString(string s);
+
 	Basket * p_basket;
 	float totalSalesTaxes;
 	float total;
-
-	void printLine(string s);
-	void printString(string s);
 };
 
 #endif /* RECEIPTGENERATOR_H_ */
