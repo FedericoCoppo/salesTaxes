@@ -9,6 +9,8 @@
 #define TEST_APPLICATIONTEST_H_
 
 #include "Application.h"
+#include "ShoppingNote.h"
+#include "ShoppingSheetList.h"
 
 // Test application class
 class ApplicationTest
@@ -19,9 +21,16 @@ public:
 	void Test(void);
 
 private:
+	void hardCodedInputCreation();
+	void testDataStruct();
+	void testCalculatedTaxeValues();
+	void testReceiptTaxeValues();
 
 	Application * app_pt;
+	ShoppingNote * p_shopNote;
+	Basket * p_basket;
 
+	ShoppingSheetList shopSheetList_1;
 };
 
 #endif /* TEST_APPLICATIONTEST_H_ */

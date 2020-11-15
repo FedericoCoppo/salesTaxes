@@ -7,14 +7,17 @@
 
 #include <assert.h>
 #include <math.h>
+
 #include "applicationTest.h"
 
-#define USER 4
+#define USER 1
 
 // Const
 ApplicationTest::ApplicationTest(void)
 {
 	app_pt = new Application();
+	p_shopNote = NULL;
+	p_basket = NULL;
 }
 
 // Dest
@@ -25,74 +28,66 @@ ApplicationTest::~ApplicationTest(void)
 		delete app_pt;
 		app_pt = NULL;
 	}
+
+	if (p_basket)
+	{
+		delete p_basket;
+	}
 }
 
-// Main test routine for application class
-void ApplicationTest::Test(void)
+// hard coded input data creation to test application
+void ApplicationTest::hardCodedInputCreation()
 {
-	int productObj;
-
-	// create the shopping chart
-	Basket b1;
-
-	// create product (to be done by future store class)
 	if (USER == 1)
 	{
-		Product p1("2 book at 12.49", Product::taxCategory::book);
-		Product p2("1 music CD at 14.99", Product::taxCategory::genericProduct);
-		Product p3("1 chocolate bar at 0.85", Product::taxCategory::food);
-		app_pt->KeepProduct(&p1,&b1);
-		app_pt->KeepProduct(&p2,&b1);
-		app_pt->KeepProduct(&p3,&b1);
-		productObj = 3;
+		p_basket = new Basket("USER 1");
+		shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("2 book at 12.49", ShoppingNote::productCategory::book));
+		shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("1 music CD at 14.99", ShoppingNote::productCategory::genericProduct));
+		shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("1 chocolate bar at 0.85", ShoppingNote::productCategory::food));
 	}
 	else if (USER == 2)
 	{
-		Product p1("1 imported box of chocolates at 10.00", Product::taxCategory::food);
-		Product p2("1 imported bottle of perfume at 47.50", Product::taxCategory::genericProduct);
-		app_pt->KeepProduct(&p1,&b1);
-		app_pt->KeepProduct(&p2,&b1);
-		productObj = 2;
+		p_basket = new Basket("USER 2");
+		p_shopNote = new ShoppingNote("1 imported box of chocolates at 10.00", ShoppingNote::productCategory::food);
+		shopSheetList_1.AddShoppingNoteToList(p_shopNote);
+		p_shopNote = new ShoppingNote("1 imported bottle of perfume at 47.50", ShoppingNote::productCategory::genericProduct);
+		shopSheetList_1.AddShoppingNoteToList(p_shopNote);
 	}
 	else if (USER == 3)
 	{
-		Product p1("1 imported bottle of perfume at 27.99", Product::taxCategory::genericProduct);
-		Product p2("1 bottle of perfume at 18.99", Product::taxCategory::genericProduct);
-		Product p3("1 packet of headache pills at 9.75", Product::taxCategory::medicine);
-		Product p4("3 box of imported chocolates at 11.25", Product::taxCategory::food);
-		app_pt->KeepProduct(&p1,&b1);
-		app_pt->KeepProduct(&p2,&b1);
-		app_pt->KeepProduct(&p3,&b1);
-		app_pt->KeepProduct(&p4,&b1);
-		productObj = 4;
+		p_basket = new Basket("USER 3");
+		shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("1 imported bottle of perfume at 27.99", ShoppingNote::productCategory::genericProduct));
+		shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("1 bottle of perfume at 18.99", ShoppingNote::productCategory::genericProduct));
+		shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("1 packet of headache pills at 9.75", ShoppingNote::productCategory::medicine));
+		shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("3 box of imported chocolates at 11.25", ShoppingNote::productCategory::food));
 	}
 	else
 	{
-		// other
-		Product p1("1 imported box of chocolates at 10.50", Product::taxCategory::food);
-		Product p2("1 imported bottle of perfume at 54.65", Product::taxCategory::genericProduct);
-		Product p3("2 book at 12.49", Product::taxCategory::book);
-		Product p4("15 box of imported chocolate at 11", Product::taxCategory::food);
-		app_pt->KeepProduct(&p1,&b1);
-		app_pt->KeepProduct(&p2,&b1);
-		app_pt->KeepProduct(&p3,&b1);
-		app_pt->KeepProduct(&p4,&b1);
-		productObj = 4;
+		p_basket = new Basket("USER 4");
+		shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("1 imported box of chocolates at 10.50", ShoppingNote::productCategory::genericProduct));
+		shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("1 imported bottle of perfume at 54.65", ShoppingNote::productCategory::genericProduct));
+		shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("2 book at 12.495", ShoppingNote::productCategory::medicine));
+		shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("15 box of imported chocolate at 1", ShoppingNote::productCategory::food));
 	}
+}
 
-	float totalPrice = 0.0;
+// UTest 1: check "Product" object has been correctly added in the basket
+void ApplicationTest::testDataStruct()
+{
+	int productObj = shopSheetList_1.GetShoppingNoteListSize();
+	assert (p_basket->GetBasketSize() == productObj);
+}
 
-	// UTest 1: check "Product" object has been correctly added in the basket
-	assert (b1.GetBasketSize() == productObj);
-
-	for (int i = 0; i < b1.GetBasketSize(); i++)
+void ApplicationTest::testCalculatedTaxeValues()
+{
+	for (int i = 0; i < p_basket->GetBasketSize(); i++)
 	{
-		Product * p = b1.GetProduct(i);
+		Product * p = p_basket->GetProduct(i);
 
 		// UTest 2: check if all imported product are correctly marked
 		if ((p->GetName().find("imported") != std::string::npos))
 		{
-			assert(b1.GetProduct(i)->GetIsImported() == true);
+			assert(p_basket->GetProduct(i)->GetIsImported() == true);
 		}
 		else
 		{
@@ -109,22 +104,18 @@ void ApplicationTest::Test(void)
 
 		if (!p->GetIsBasicSalesTaxed() && !p->GetIsImported())
 		{
-			// no taxes
 			taxPercentage_x100 = 0.0;
 		}
 		else if (p->GetIsBasicSalesTaxed() && p->GetIsImported())
 		{
-			// both taxes 10% and 5%
 			taxPercentage_x100 = 0.15;
 		}
 		else if (p->GetIsBasicSalesTaxed())
 		{
-			// basic tax
 			taxPercentage_x100 = 0.10;
 		}
 		else
 		{
-			// import tax
 			taxPercentage_x100 = 0.05;
 		}
 
@@ -137,9 +128,19 @@ void ApplicationTest::Test(void)
 		// consider the number of that product
 		testTax *= p->GetProductNumber();
 
-		// compare with product tax field
+		// compare with specific product tax field
 		assert( ( int (p->GetTaxes()*100) == int (testTax*100) ));
+	}
+}
 
+// test receipt method
+void ApplicationTest::testReceiptTaxeValues()
+{
+	float totalPrice = 0.0;
+
+	for (int i = 0; i < p_basket->GetBasketSize(); i++)
+	{
+		Product * p = p_basket->GetProduct(i);
 		for (int j = 0; j < p->GetProductNumber(); j++)
 		{
 			totalPrice += p->GetPrice();
@@ -147,7 +148,7 @@ void ApplicationTest::Test(void)
 	}
 
 	// UTest4: Receipt test
-	ReceiptGenerator * p_receipt = new ReceiptGenerator(&b1);
+	Receipt * p_receipt = new Receipt(p_basket);
 	p_receipt->CalculateReceipt();
 
 	// receipt amount
@@ -159,8 +160,24 @@ void ApplicationTest::Test(void)
 	// the receipt total minus the taxes should be equal the sum of products's prices
 	assert( (int) (totalPrice + p_receipt->GetTotalSalesTaxes())*100 ==  (int) p_receipt->GetTotal()*100);
 
+	// print the output
 	p_receipt->PrintReceipt();
 
 	delete p_receipt;
+}
+
+// Main test routine for application class
+void ApplicationTest::Test(void)
+{
+	// input data creation
+	hardCodedInputCreation();
+
+	// from input data to basket
+	app_pt->FillBasketFromShoppingList(&shopSheetList_1, p_basket);
+
+	// Test start ...
+	testDataStruct();
+	testCalculatedTaxeValues();
+	testReceiptTaxeValues();
 }
 
