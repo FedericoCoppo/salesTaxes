@@ -13,7 +13,7 @@
 #include <iostream>
 #include "Application.h"
 
-// Run configuration
-#define TEST_APPLICATION   // switch to test
+// Running configuration
+#define TEST_APPLICATION
 
 #endif /* MAIN_H_ */
