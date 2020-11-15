@@ -30,6 +30,8 @@ public:
 
 	ShoppingNote(const char * p_note, productCategory productCat);
 	virtual ~ShoppingNote(void);
+	string GetShoppingNoteString() { return note; }
+	productCategory GetShoppingNoteCategory() { return category; }
 
 private:
 
