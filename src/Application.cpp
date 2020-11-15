@@ -6,7 +6,13 @@
 *******************************************************************************/
 
 // include
+#include <sstream>
+
 #include "Application.h"
+
+// Static attribute
+const int Application::ProductNumberMax = 1000;
+const int Application::ProducNameCharacterMin = 3;
 
 // Const.
 Application::Application(void)
@@ -20,9 +26,99 @@ Application::~Application(void)
 
 }
 
-void Application::KeepProduct(Product * p_product, Basket * p_basket)
+// Move product to basket and remove its description from from sopping list
+void Application::FillBasketFromShoppingList(ShoppingSheetList *p_shopList, Basket * p_basket)
 {
-	p_basket->AddProductToBasket(p_product);
+	ShoppingNote * p_shopNoteTmp;
+	Product * p_productTmp;
+
+	for (int i = 0; i < p_shopList->GetShoppingNoteListSize(); i++)
+	{
+		p_shopNoteTmp = p_shopList->ExtractShoppingNoteFromList(i);
+
+		if (p_shopNoteTmp)
+		{
+			// validate the note before creating a new product
+			string prodName;
+			int prodNum = 0;
+			float prodPrice = 0.0;
+
+			if (validateShoppingNote(p_shopNoteTmp->GetShoppingNoteString(), &prodNum, &prodName, &prodPrice))
+			{
+				// create product
+				switch (p_shopNoteTmp->GetShoppingNoteCategory())
+				{
+				case ShoppingNote::productCategory::book:
+					p_productTmp= new Product(prodName, prodNum, prodPrice, Product::book);
+					break;
+
+				case ShoppingNote::productCategory::food:
+					p_productTmp= new Product(prodName, prodNum, prodPrice, Product::book);
+					break;
+
+				case ShoppingNote::productCategory::medicine:
+					p_productTmp= new Product(prodName, prodNum, prodPrice, Product::book);
+					break;
+
+				case ShoppingNote::productCategory::genericProduct:
+					p_productTmp= new Product(prodName, prodNum, prodPrice, Product::genericProduct);
+					break;
+				}
+
+				// add product to basket
+				p_basket->AddProductToBasket(p_productTmp);
+			}
+
+			// remove your note -> TBD
+		}
+	}
+}
+
+bool Application::validateShoppingNote(string s, int * p_number, string * p_name, float * p_price)
+{
+	bool res = true;
+
+	// Check the number number
+	int num;
+	string numStr = s.substr(0, s.find(" "));
+	stringstream ssNum(numStr);
+	ssNum >> num;
+	*p_number = num;
+
+	if ( (num >= Application::ProductNumberMax) || (num <= 0) )
+	{
+		res = false;
+	}
+	else
+	{
+		// check the name
+		s = s.erase(0, numStr.length() + 1);
+		string nameStr = s.substr(0, s.find(" at "));
+
+		if (nameStr.length() < Application::ProducNameCharacterMin)
+		{
+			res = false;
+		}
+		else
+		{
+			*p_name = nameStr;
+
+			// product price
+			string priceStr = s.erase(0, nameStr.length() + 4);
+
+			try
+			{
+				*p_price = std::stof(priceStr);
+			}
+			catch (const std::invalid_argument& ia)
+			{
+				std::cerr << "Invalid argument: " << ia.what() << '\n';
+				res = false;
+			}
+		}
+	}
+
+	return res;
 }
 
 // Print method with standard output flush for char *

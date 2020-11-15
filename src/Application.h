@@ -14,8 +14,8 @@
 
 #include "Product.h"
 #include "Basket.h"
-#include "ReceiptGenerator.h"
-
+#include "Receipt.h"
+#include "ShoppingSheetList.h"
 
 using namespace std;
 
@@ -25,13 +25,16 @@ class Application
 public:
 	Application(void);
 	virtual ~Application(void);
-	void KeepProduct(Product * p_product, Basket * p_basket);
-
+	void FillBasketFromShoppingList(ShoppingSheetList *p_shopList, Basket * p_basket);
 	void PrintLine(const char * pt);
 	void PrintString(string s);
 
 private:
+	bool validateShoppingNote(string s, int * p_number, string * p_name, float * p_price);
 
+	// maximum input value allowed
+	static const int ProductNumberMax;
+	static const int ProducNameCharacterMin;
 };
 
 #endif /* APPLICATION_H_ */
