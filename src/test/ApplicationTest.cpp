@@ -85,6 +85,9 @@ void ApplicationTest::testCalculatedTaxeValues()
 		Product * p = p_basket->GetProduct(i);
 		p->CalculateTaxes();
 
+		// test for multiple taxes calculation on same product
+		p->CalculateTaxes();
+
 		// UTest 2: check if all imported product are correctly marked
 		if ((p->GetName().find("imported") != std::string::npos))
 		{
