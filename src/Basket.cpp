@@ -9,9 +9,9 @@
 #include "Basket.h"
 
 // Const.
-Basket::Basket(void)
+Basket::Basket(const char * p_name)
 {
-
+	pt_name = p_name;
 }
 
 // Dest.
@@ -23,7 +23,10 @@ Basket::~Basket(void)
 // Add a new product to shopping basket
 void Basket::AddProductToBasket(Product * pt)
 {
-   productList.push_back(*pt);
+	if (pt)
+	{
+		productList.push_back(*pt);
+	}
 }
 
 // Get product at specific index

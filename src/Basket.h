@@ -18,16 +18,17 @@ using namespace std;
 class Basket
 {
 public:
-	Basket();
+	Basket(const char * p_name);
 	virtual ~Basket(void);
 	void AddProductToBasket(Product * pt);
 
 	// Getter
 	int GetBasketSize(){ return productList.size(); }
 	Product * GetProduct (int idx);
-
+	const char * GetName() { return pt_name; }
 private:
 	list <Product> productList;
+	const char * pt_name;
 };
 
 
