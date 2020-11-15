@@ -16,16 +16,17 @@
 using namespace std;
 
 // Const.
-Product::Product(const char * p_line, taxCategory cat)
+Product::Product(string prodName, int prodNum, float prodPrice, taxCategory cat)
 {
-	inputString = (string) p_line;
+	name = prodName;
+	price = prodPrice;
+	productNumber = prodNum;
 	category = cat;
 
-	price = 0.0;
 	taxedPrice = price;
 	taxes = 0.0;
 	taxesPct = 0.0;
-	productNumber = 1;
+
 	isImported = false;
 	isBasicSalesTaxed = false;
 
@@ -35,7 +36,6 @@ Product::Product(const char * p_line, taxCategory cat)
 		taxesPct = 0.1;
 	}
 
-	parseInputLine();
 	calculateTaxes();
 }
 
@@ -48,19 +48,11 @@ Product::~Product(void)
 	isBasicSalesTaxed = false;
 }
 
-// line parsing
-void Product::parseInputLine (void)
+// sales tax calculation routine
+float Product::calculateTaxes()
 {
-	// number of product
-	string occurency = inputString.substr(0, inputString.find(" "));
-	stringstream ssOccurency(occurency);
-
-	// in case of invalid argument the value is maintained equal zero
-	ssOccurency >> productNumber;
-
-	// product name
-	inputString = inputString.erase(0, occurency.length() + 1);
-	name = inputString.substr(0, inputString.find(" at "));
+	float rawTaxes;
+	float roundedTaxes;
 
 	// mark as additional input duty
 	if (GetName().find("imported") != std::string::npos)
@@ -69,26 +61,6 @@ void Product::parseInputLine (void)
 		taxesPct += 0.05;
 	}
 
-	// product price
-	string priceStr = inputString.erase(0, name.length() + 4);
-
-	try
-	{
-		// stof with invalid argument produce exception
-		price = std::stof(priceStr);
-	}
-	catch (const std::invalid_argument& ia)
-	{
-		std::cerr << "Invalid argument: " << ia.what() << '\n';
-		return;
-	}
-}
-
-// sales tax calculation routine
-float Product::calculateTaxes()
-{
-	float rawTaxes;
-	float roundedTaxes;
 	for (int i = 0; i < productNumber; i++ )
 	{
 		rawTaxes = taxesPct*price;

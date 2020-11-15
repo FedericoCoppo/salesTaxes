@@ -27,7 +27,7 @@ public:
 
 	} taxCategory;
 
-	Product(const char * p_line, taxCategory cat);
+	Product(string prodName, int prodNum, float prodPrice, taxCategory cat);
 	virtual ~Product(void);
 
 	// Getter
@@ -40,16 +40,9 @@ public:
 	int GetProductNumber() { return productNumber; }
 
 private:
-	void parseInputLine (void);
-
-	// taxes calculation
 	float calculateTaxes();
 	float roundUpTo05(float num);
 
-	// taxes value update
-	void setTaxes(float t) {taxes = t;}
-
-	string inputString;
 	string name;
 	int productNumber;
 	float price;
