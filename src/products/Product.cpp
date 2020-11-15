@@ -16,27 +16,17 @@
 using namespace std;
 
 // Const.
-Product::Product(string prodName, int prodNum, float prodPrice, taxCategory cat)
+Product::Product(string prodName, int prodNum, float prodPrice)
 {
 	name = prodName;
 	price = prodPrice;
 	productNumber = prodNum;
-	category = cat;
-
 	taxedPrice = price;
 	taxes = 0.0;
 	taxesPct = 0.0;
-
 	isImported = false;
-	isBasicSalesTaxed = false;
-
-	if (category == genericProduct)
-	{
-		isBasicSalesTaxed = true;
-		taxesPct = 0.1;
-	}
-
-	calculateTaxes();
+	isBasicSalesTaxed = true;
+	taxesAlreadyCalculated = false;
 }
 
 // Dest.
@@ -45,30 +35,41 @@ Product::~Product(void)
 	price = 0.0;
 	taxes = 0.0;
 	isImported = false;
-	isBasicSalesTaxed = false;
+	taxesAlreadyCalculated = false;
 }
 
 // sales tax calculation routine
-float Product::calculateTaxes()
+float Product::CalculateTaxes()
 {
-	float rawTaxes;
-	float roundedTaxes;
-
-	// mark as additional input duty
-	if (GetName().find("imported") != std::string::npos)
+	if (!taxesAlreadyCalculated)
 	{
-		isImported = true;
-		taxesPct += 0.05;
-	}
+		taxesAlreadyCalculated = true;
 
-	for (int i = 0; i < productNumber; i++ )
-	{
-		rawTaxes = taxesPct*price;
-		roundedTaxes = roundUpTo05(rawTaxes);
-		taxes += roundedTaxes;
-	}
+		float rawTaxes;
+		float roundedTaxes;
 
-	taxedPrice = price*productNumber + taxes;
+		// basic sales taxes
+		if (isBasicSalesTaxed)
+		{
+			taxesPct = 0.1;
+		}
+
+		// mark as additional input duty
+		if (GetName().find("imported") != std::string::npos)
+		{
+			isImported = true;
+			taxesPct += 0.05;
+		}
+
+		for (int i = 0; i < productNumber; i++ )
+		{
+			rawTaxes = taxesPct*price;
+			roundedTaxes = roundUpTo05(rawTaxes);
+			taxes += roundedTaxes;
+		}
+
+		taxedPrice = price*productNumber + taxes;
+	}
 
 	return taxes;
 }

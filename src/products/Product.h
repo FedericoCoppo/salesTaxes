@@ -17,18 +17,9 @@ using namespace std;
 class Product
 {
 public:
-
-	typedef enum
-	{
-		food,
-		book,
-		medicine,
-		genericProduct
-
-	} taxCategory;
-
-	Product(string prodName, int prodNum, float prodPrice, taxCategory cat);
+	Product(string prodName, int prodNum, float prodPrice);
 	virtual ~Product(void);
+	float CalculateTaxes();
 
 	// Getter
 	string GetName() { return name;}
@@ -39,8 +30,10 @@ public:
 	float GetTaxedPrice() { return taxedPrice; }
 	int GetProductNumber() { return productNumber; }
 
+protected:
+	bool isBasicSalesTaxed = false;
+
 private:
-	float calculateTaxes();
 	float roundUpTo05(float num);
 
 	string name;
@@ -50,8 +43,7 @@ private:
 	float taxes;
 	float taxesPct;
 	bool isImported;
-	bool isBasicSalesTaxed;
-	taxCategory category;
+	bool taxesAlreadyCalculated;
 };
 
 #endif /* PRODUCT_H_ */
