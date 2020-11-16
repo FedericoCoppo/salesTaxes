@@ -25,6 +25,13 @@ GenericProduct::GenericProduct(string prodName, int prodNum, float prodPrice)
 	isImported = false;
 	isBasicSalesTaxed = true;
 	taxesAlreadyCalculated = false;
+
+	// mark as additional input duty
+	if (GetName().find("imported") != std::string::npos)
+	{
+		isImported = true;
+		taxesPct += 0.05;
+	}
 }
 
 // Destructor
@@ -46,21 +53,14 @@ float GenericProduct::CalculateTaxes()
 		// basic sales taxes
 		if (isBasicSalesTaxed)
 		{
-			taxesPct = 0.1;
-		}
-
-		// mark as additional input duty
-		if (GetName().find("imported") != std::string::npos)
-		{
-			isImported = true;
-			taxesPct += 0.05;
+			taxesPct += 0.1;
 		}
 
 		// consider the number of items
 		for (int i = 0; i < productNumber; i++ )
 		{
 			rawTaxes = taxesPct*price;
-			roundedTaxes = roundUpTo05(rawTaxes);
+			roundedTaxes = RoundUpTo05(rawTaxes);
 			taxes += roundedTaxes;
 		}
 
@@ -71,7 +71,7 @@ float GenericProduct::CalculateTaxes()
 }
 
 // Utility to round up to 0.05 a decimal float value
-float GenericProduct::roundUpTo05(float num)
+float GenericProduct::RoundUpTo05(float num)
 {
 	return ceil(num*20)/20;
 }

@@ -20,6 +20,7 @@ public:
 	GenericProduct(string prodName, int prodNum, float prodPrice);
 	virtual ~GenericProduct(void);
 	float CalculateTaxes();
+	float RoundUpTo05(float num);
 
 	// Getter
 	string GetName() { return name;}
@@ -34,8 +35,6 @@ protected:
 	bool isBasicSalesTaxed = false;
 
 private:
-	float roundUpTo05(float num);
-
 	string name;
 	int productNumber;
 	float price;
