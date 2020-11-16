@@ -13,7 +13,8 @@
 #include "applicationTest.h"
 
 // define
-#define USER 1 // it allow to change test input
+
+const unsigned char User = 5;
 
 // Constructor
 ApplicationTest::ApplicationTest(void)
@@ -44,14 +45,14 @@ ApplicationTest::~ApplicationTest(void)
 void ApplicationTest::hardCodedInputCreation()
 {
 	// switch test input
-	if (USER == 1)
+	if (User == 1)
 	{
 		p_basket = new Basket("USER 1");
 		shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("2 book at 12.49", ShoppingNote::productCategory::book));
 		shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("1 music CD at 14.99", ShoppingNote::productCategory::genericProduct));
 		shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("1 chocolate bar at 0.85", ShoppingNote::productCategory::food));
 	}
-	else if (USER == 2)
+	else if (User == 2)
 	{
 		p_basket = new Basket("USER 2");
 		p_shopNote = new ShoppingNote("1 imported box of chocolates at 10.00", ShoppingNote::productCategory::food);
@@ -59,7 +60,7 @@ void ApplicationTest::hardCodedInputCreation()
 		p_shopNote = new ShoppingNote("1 imported bottle of perfume at 47.50", ShoppingNote::productCategory::genericProduct);
 		shopSheetList_1.AddShoppingNoteToList(p_shopNote);
 	}
-	else if (USER == 3)
+	else if (User == 3)
 	{
 		p_basket = new Basket("USER 3");
 		shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("1 imported bottle of perfume at 27.99", ShoppingNote::productCategory::genericProduct));
@@ -67,13 +68,17 @@ void ApplicationTest::hardCodedInputCreation()
 		shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("1 packet of headache pills at 9.75", ShoppingNote::productCategory::medicine));
 		shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("3 box of imported chocolates at 11.25", ShoppingNote::productCategory::food));
 	}
-	else
+	else if (User == 4)
 	{
 		p_basket = new Basket("USER 4");
 		shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("1 imported box of chocolates at 10.50", ShoppingNote::productCategory::genericProduct));
 		shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("1 imported bottle of perfume at 54.65", ShoppingNote::productCategory::genericProduct));
 		shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("2 book at 12.495", ShoppingNote::productCategory::medicine));
 		shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("15 box of imported chocolate at 1", ShoppingNote::productCategory::food));
+	}
+	else
+	{
+		p_basket = new Basket("USER 5");
 	}
 }
 
