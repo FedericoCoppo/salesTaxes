@@ -2,7 +2,8 @@
 	File        : Receipt.cpp
 	Date        : 13/11/2020
 	Author      : Federico Coppo
-	Description : Receipt generator class
+	Description : Receipt generator class:
+				  it calculate and print the receipt
 *******************************************************************************/
 
 // include
@@ -13,7 +14,7 @@
 
 #include "Receipt.h"
 
-// Const
+// Constructor
 Receipt::Receipt(Basket * pt_basket)
 {
 	p_basket = pt_basket;
@@ -21,13 +22,13 @@ Receipt::Receipt(Basket * pt_basket)
 	total = 0;
 }
 
-// Dest
+// Destructor
 Receipt::~Receipt(void)
 {
 	p_basket = NULL;
 }
 
-// Calculate total and cumulative taxes
+// Calculate total cost and cumulative taxes
 void Receipt::CalculateReceipt(void)
 {
 	if (p_basket)
@@ -40,7 +41,7 @@ void Receipt::CalculateReceipt(void)
 	}
 }
 
-// Print basket's receipt
+// Print the receipt
 void Receipt::PrintReceipt ()
 {
 	if (p_basket)
@@ -54,22 +55,25 @@ void Receipt::PrintReceipt ()
 
 		for (int i = 0; i < p_basket->GetBasketSize(); i++)
 		{
-			// number
+			// product number
 			std::stringstream streamNumberOfProduct;
 			streamNumberOfProduct << std::fixed << std::setprecision(2) << p_basket->GetProduct(i)->GetProductNumber();
 			printString(streamNumberOfProduct.str() + " ");
 
-			// name
+			// product name
 			printString(p_basket->GetProduct(i)->GetName() + ": ");
 
-			// price
+			// product price
 			std::stringstream streamTaxedPrice;
 			streamTaxedPrice << std::fixed << std::setprecision(2) << p_basket->GetProduct(i)->GetTaxedPrice();
 			printLine(streamTaxedPrice.str());
 		}
 
+		// shopping totale sales taxes
 		printString("Sales Taxes: ");
 		printLine(streamTotalTaxes.str());
+
+		// shopping total price
 		printString("Total: ");
 		printLine(streamTotal.str());
 	}

@@ -11,6 +11,7 @@
 // include
 #include <string>
 #include <list>
+
 #include "ShoppingNote.h"
 
 using namespace std;
@@ -22,10 +23,10 @@ public:
 	ShoppingSheetList();
 	virtual ~ShoppingSheetList();
 	void AddShoppingNoteToList(ShoppingNote * pt);
-	ShoppingNote * GetShoppingNote(int idx);
 	void RemoveAllNoteFromShoppingList();
 
 	// Getter
+	ShoppingNote * GetShoppingNote(int idx);
 	int GetShoppingNoteListSize() { return noteList.size(); }
 
 private:

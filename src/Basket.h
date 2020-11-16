@@ -3,6 +3,7 @@
 	Date        : 13/11/2020
 	Author      : Federico Coppo
 	Description : Basket class header
+				  it is a shopping cart
 *******************************************************************************/
 
 #ifndef BASKET_H_
@@ -12,9 +13,10 @@ using namespace std;
 
 // include
 #include <list>
+
 #include "GenericProduct.h"
 
-// Class that implement a shopping cart
+// Class that implement a basket
 class Basket
 {
 public:
@@ -24,9 +26,10 @@ public:
 	void RemoveAllProductFromBasket();
 
 	// Getter
-	int GetBasketSize(){ return productList.size(); }
 	GenericProduct * GetProduct (int idx);
+	int GetBasketSize(){ return productList.size(); }
 	const char * GetName() { return pt_name; }
+
 private:
 	list <GenericProduct *> productList;
 	const char * pt_name;

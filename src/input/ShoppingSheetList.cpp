@@ -6,23 +6,22 @@
 				  metaphorically it represents the shopping paper list
 *******************************************************************************/
 
-// include
 #include "ShoppingSheetList.h"
 
-// Const.
+// Constructor
 ShoppingSheetList::ShoppingSheetList()
 {
 
 }
 
-// Dest.
+// Destructor
 ShoppingSheetList::~ShoppingSheetList(void)
 {
-	// In case forgoten by user...
+	// Clear the list if not already done by user..
 	RemoveAllNoteFromShoppingList();
 }
 
-// Adds a new product note to the shopping list
+// Insert a new product note in the shopping list
 void ShoppingSheetList::AddShoppingNoteToList(ShoppingNote * pt)
 {
 	if (pt)
@@ -31,7 +30,7 @@ void ShoppingSheetList::AddShoppingNoteToList(ShoppingNote * pt)
 	}
 }
 
-// it remove all product from basket
+// Remove all note from shopping list
 void ShoppingSheetList::RemoveAllNoteFromShoppingList()
 {
 	int max = GetShoppingNoteListSize();
@@ -49,7 +48,7 @@ void ShoppingSheetList::RemoveAllNoteFromShoppingList()
 }
 
 
-// Keep note info from the shopping list
+// Get Note from the shopping list
 ShoppingNote * ShoppingSheetList::GetShoppingNote(int idx)
 {
 	if (idx < GetShoppingNoteListSize())

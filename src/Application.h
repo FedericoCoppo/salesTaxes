@@ -3,6 +3,8 @@
 	Date        : 13/11/2020
 	Author      : Federico Coppo
 	Description : Application header
+				  Application represent the user that convert the shopping notes
+				  into products and fill the basket
  *******************************************************************************/
 
 #ifndef APPLICATION_H_
@@ -36,8 +38,10 @@ public:
 private:
 	bool validateShoppingNote(string s, int * p_number, string * p_name, float * p_price);
 
-	// maximum input value allowed
+	// Max product number allowed as input
 	static const int ProductNumberMax;
+
+	// Minimum digit allowed for product name as input
 	static const int ProducNameCharacterMin;
 };
 

@@ -2,17 +2,20 @@
 	File        : ApplicationTest.cpp
 	Date        : 13/11/2020
 	Author      : Federico Coppo
-	Description : Test Application header
+	Description : Test Application
+				  it create and test Application
 *******************************************************************************/
 
+// include
 #include <assert.h>
 #include <math.h>
 
 #include "applicationTest.h"
 
-#define USER 1
+// define
+#define USER 1 // it allow to change test input
 
-// Const
+// Constructor
 ApplicationTest::ApplicationTest(void)
 {
 	app_pt = new Application();
@@ -20,9 +23,10 @@ ApplicationTest::ApplicationTest(void)
 	p_basket = NULL;
 }
 
-// Dest
+// Destructor
 ApplicationTest::~ApplicationTest(void)
 {
+	// clear the heap
 	if (app_pt != NULL)
 	{
 		delete app_pt;
@@ -36,9 +40,10 @@ ApplicationTest::~ApplicationTest(void)
 	}
 }
 
-// hard coded input data creation to test application
+// Hard coded input data creation
 void ApplicationTest::hardCodedInputCreation()
 {
+	// switch test input
 	if (USER == 1)
 	{
 		p_basket = new Basket("USER 1");
@@ -72,13 +77,14 @@ void ApplicationTest::hardCodedInputCreation()
 	}
 }
 
-// UTest 1: check "Product" object has been correctly added in the basket
+// UTest 1: check that all product object has been correctly added in the basket
 void ApplicationTest::testDataStruct()
 {
 	int productObj = shopSheetList_1.GetShoppingNoteListSize();
 	assert (p_basket->GetBasketSize() == productObj);
 }
 
+// Test the product sales taxes
 void ApplicationTest::testCalculatedTaxeValues()
 {
 	for (int i = 0; i < p_basket->GetBasketSize(); i++)
@@ -138,7 +144,7 @@ void ApplicationTest::testCalculatedTaxeValues()
 	}
 }
 
-// test receipt method
+// Test the Receipt calculation
 void ApplicationTest::testReceiptTaxeValues()
 {
 	float totalPrice = 0.0;
@@ -191,6 +197,7 @@ void ApplicationTest::Test(void)
 	// Clear basket from product
 	app_pt->ClearBasketFromAllProduct(p_basket);
 
+	// clear
 	delete p_basket;
 	p_basket = NULL;
 }

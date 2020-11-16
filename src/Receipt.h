@@ -18,6 +18,8 @@ public:
 	virtual ~Receipt();
 	void CalculateReceipt();
 	void PrintReceipt();
+
+	// Getter
 	float GetTotal() { return total; }
 	float GetTotalSalesTaxes() { return totalSalesTaxes; }
 
@@ -25,8 +27,13 @@ private:
 	void printLine(string s);
 	void printString(string s);
 
+	// reference basket of this receipt
 	Basket * p_basket;
+
+	// Sum of taxes
 	float totalSalesTaxes;
+
+	// final price
 	float total;
 };
 

@@ -16,7 +16,7 @@ Food::Food(string name, int num, float price):
 	isBasicSalesTaxed = false;
 }
 
-// Destructor .
+// Destructor
 Food::~Food()
 {
 

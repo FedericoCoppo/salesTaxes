@@ -8,20 +8,20 @@
 
 #include "Basket.h"
 
-// Const.
+// Constructor
 Basket::Basket(const char * p_name)
 {
 	pt_name = p_name;
 }
 
-// Dest.
+// Destructor
 Basket::~Basket(void)
 {
 	// In case forgotten by user...
 	RemoveAllProductFromBasket();
 }
 
-// Add a new product to shopping basket
+// Add a new product object to shopping basket
 void Basket::AddProductToBasket(GenericProduct * pt)
 {
 	if (pt)
@@ -30,7 +30,7 @@ void Basket::AddProductToBasket(GenericProduct * pt)
 	}
 }
 
-// it remove all product from basket
+// Remove all product from basket
 void Basket::RemoveAllProductFromBasket()
 {
 	int max = GetBasketSize();

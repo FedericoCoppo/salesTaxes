@@ -16,7 +16,7 @@ GenericProduct(name, num, price)
 	isBasicSalesTaxed = false;
 }
 
-// Destructor .
+// Destructor
 Medicine::~Medicine()
 {
 

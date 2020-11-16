@@ -11,7 +11,7 @@ int main()
 {
 #ifdef TEST_APPLICATION
 
-	// testing application
+	// Testing application
 	ApplicationTest * testApp_pt = new ApplicationTest();
 	testApp_pt->Test();
 	delete testApp_pt;
@@ -22,6 +22,7 @@ int main()
 
 #endif
 
+	cout << "Main End..";
 	return 0;
 }
 

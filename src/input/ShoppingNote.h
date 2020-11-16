@@ -28,14 +28,16 @@ public:
 
 	} productCategory;
 
-	ShoppingNote(const char * p_note, productCategory productCat);
+	ShoppingNote(string noteStr, productCategory productCat);
 	virtual ~ShoppingNote(void);
+
+	// Getter
 	string GetShoppingNoteString() { return note; }
 	productCategory GetShoppingNoteCategory() { return category; }
 
 private:
 
-	// product input string
+	// product info input string
 	string note;
 
 	// product category

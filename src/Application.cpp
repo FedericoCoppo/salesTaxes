@@ -2,7 +2,9 @@
 	File        : Application.cpp
 	Date        : 13/11/2020
 	Author      : Federico Coppo
-	Description : Application class header
+	Description : Application class header:
+				  it represent the user that convert the shopping notes into
+				  products and fill the basket
 *******************************************************************************/
 
 // include
@@ -14,19 +16,19 @@
 const int Application::ProductNumberMax = 1000;
 const int Application::ProducNameCharacterMin = 3;
 
-// Const.
+// Constructor
 Application::Application(void)
 {
 
 }
 
-// Dest.
+// Destructor
 Application::~Application(void)
 {
 
 }
 
-// Move product to basket and remove its description from from sopping list
+// Fill the buffer with products converted from shopping list
 void Application::FillBasketFromShoppingList(ShoppingSheetList *p_shopList, Basket * p_basket)
 {
 	ShoppingNote * p_shopNoteTmp;
@@ -38,6 +40,7 @@ void Application::FillBasketFromShoppingList(ShoppingSheetList *p_shopList, Bask
 		ShopListSize = p_shopList->GetShoppingNoteListSize();
 	}
 
+	// for each  notes
 	for (int i = 0; i < ShopListSize; i++)
 	{
 		p_shopNoteTmp = p_shopList->GetShoppingNote(i);
@@ -49,9 +52,10 @@ void Application::FillBasketFromShoppingList(ShoppingSheetList *p_shopList, Bask
 			int prodNum = 0;
 			float prodPrice = 0.0;
 
+			// validate the note
 			if (validateShoppingNote(p_shopNoteTmp->GetShoppingNoteString(), &prodNum, &prodName, &prodPrice))
 			{
-				// create product
+				// convert the note into product
 				switch (p_shopNoteTmp->GetShoppingNoteCategory())
 				{
 				case ShoppingNote::productCategory::book:
@@ -68,14 +72,12 @@ void Application::FillBasketFromShoppingList(ShoppingSheetList *p_shopList, Bask
 					break;
 				}
 
-				// add product to basket
+				// add the product to basket
 				if (p_basket)
 				{
 					p_basket->AddProductToBasket(p_productTmp);
 				}
 			}
-
-			// remove your note -> TBD
 		}
 	}
 }
@@ -89,7 +91,7 @@ void Application::ClearBasketFromAllProduct(Basket * p_basket)
 	}
 }
 
-// Application validate shopping list note before creating a new product
+//  Validate the shopping list note
 bool Application::validateShoppingNote(string s, int * p_number, string * p_name, float * p_price)
 {
 	bool res = true;
@@ -101,6 +103,7 @@ bool Application::validateShoppingNote(string s, int * p_number, string * p_name
 	ssNum >> num;
 	*p_number = num;
 
+	// avoid too big or negative input value
 	if ( (num >= Application::ProductNumberMax) || (num <= 0) )
 	{
 		res = false;
@@ -111,6 +114,7 @@ bool Application::validateShoppingNote(string s, int * p_number, string * p_name
 		s = s.erase(0, numStr.length() + 1);
 		string nameStr = s.substr(0, s.find(" at "));
 
+		// avoid too little input name
 		if (nameStr.length() < Application::ProducNameCharacterMin)
 		{
 			res = false;
@@ -119,9 +123,10 @@ bool Application::validateShoppingNote(string s, int * p_number, string * p_name
 		{
 			*p_name = nameStr;
 
-			// product price
+			// get the product price
 			string priceStr = s.erase(0, nameStr.length() + 4);
 
+			// avoid wrong format price input
 			try
 			{
 				*p_price = std::stof(priceStr);

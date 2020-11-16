@@ -13,14 +13,12 @@
 
 #include "GenericProduct.h"
 
-using namespace std;
-
-// Const.
+// Constructor
 GenericProduct::GenericProduct(string prodName, int prodNum, float prodPrice)
 {
 	name = prodName;
-	price = prodPrice;
 	productNumber = prodNum;
+	price = prodPrice;
 	taxedPrice = price;
 	taxes = 0.0;
 	taxesPct = 0.0;
@@ -29,13 +27,10 @@ GenericProduct::GenericProduct(string prodName, int prodNum, float prodPrice)
 	taxesAlreadyCalculated = false;
 }
 
-// Dest.
+// Destructor
 GenericProduct::~GenericProduct(void)
 {
-	price = 0.0;
-	taxes = 0.0;
-	isImported = false;
-	taxesAlreadyCalculated = false;
+
 }
 
 // sales tax calculation routine
@@ -61,6 +56,7 @@ float GenericProduct::CalculateTaxes()
 			taxesPct += 0.05;
 		}
 
+		// consider the number of items
 		for (int i = 0; i < productNumber; i++ )
 		{
 			rawTaxes = taxesPct*price;
@@ -74,6 +70,7 @@ float GenericProduct::CalculateTaxes()
 	return taxes;
 }
 
+// Utility to round up to 0.05 a decimal float value
 float GenericProduct::roundUpTo05(float num)
 {
 	return ceil(num*20)/20;

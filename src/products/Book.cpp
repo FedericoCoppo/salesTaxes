@@ -6,7 +6,6 @@
 				  book specific product class
  *******************************************************************************/
 
-// include
 #include "Book.h"
 
 // Constructor
@@ -16,7 +15,7 @@ GenericProduct(name, num, price)
 	isBasicSalesTaxed = false;
 }
 
-// Destructor .
+// Destructor
 Book::~Book()
 {
 
