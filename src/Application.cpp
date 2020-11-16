@@ -9,6 +9,7 @@
 
 // include
 #include <sstream>
+#include <string.h>
 
 #include "Application.h"
 
@@ -101,11 +102,15 @@ bool Application::validateShoppingNote(string s, int * p_number, string * p_name
 	bool res = true;
 
 	// Check the number number
-	int num;
+	int num = 0;
 	string numStr = s.substr(0, s.find(" "));
 	stringstream ssNum(numStr);
-	ssNum >> num;
-	*p_number = num;
+
+	if (isValidNumber(ssNum.str()))
+	{
+		ssNum >> num;
+		*p_number = num;
+	}
 
 	// avoid too big or negative input value
 	if ( (num >= Application::ProductNumberMax) || (num <= 0) )
@@ -130,20 +135,33 @@ bool Application::validateShoppingNote(string s, int * p_number, string * p_name
 			// get the product price
 			string priceStr = s.erase(0, nameStr.length() + 4);
 
-			// avoid wrong format price input
-			try
+			if (isValidNumber(priceStr))
 			{
-				*p_price = std::stof(priceStr);
+				// avoid wrong format price input
+				try
+				{
+					*p_price = std::stof(priceStr);
+				}
+				catch (const std::invalid_argument& ia)
+				{
+					std::cerr << "Invalid argument: " << ia.what() << '\n';
+					res = false;
+				}
 			}
-			catch (const std::invalid_argument& ia)
+			else
 			{
-				std::cerr << "Invalid argument: " << ia.what() << '\n';
 				res = false;
 			}
 		}
 	}
 
 	return res;
+}
+
+// Routine to check if string is a number
+bool Application::isValidNumber(const std::string &s)
+{
+  return( strspn( s.c_str(), "-.0123456789" ) == s.size() );
 }
 
 // Print method with standard output flush for char *
