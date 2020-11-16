@@ -28,6 +28,7 @@ private:
 	void clearShoppingSheet(ShoppingSheetList * p_list);
 
 	ShoppingSheetList * p_shopSheetList;
+	bool isCreated;
 
 	// configuration parameter
 	static const unsigned char User;

@@ -16,6 +16,7 @@ const bool InputProvider::WrongInput = false;
 InputProvider::InputProvider()
 {
 	p_shopSheetList = new ShoppingSheetList();
+	isCreated = false;
 }
 
 // Destructor
@@ -50,16 +51,22 @@ void InputProvider::clearShoppingSheet(ShoppingSheetList * p_list)
 // Create input
 ShoppingSheetList * InputProvider::InputCreate()
 {
-	// Create input
-	if (WrongInput)
+	// Avoid overwrite multiple input for this provider
+	if (!isCreated)
 	{
-		// wrong input data creation
-		hardCodedWrongInputCreate();
-	}
-	else
-	{
-		// correct input data creation
-		hardCodedInputCreate();
+		isCreated = true;
+
+		// Create input
+		if (WrongInput)
+		{
+			// wrong input data creation
+			hardCodedWrongInputCreate();
+		}
+		else
+		{
+			// correct input data creation
+			hardCodedInputCreate();
+		}
 	}
 
 	return p_shopSheetList;
