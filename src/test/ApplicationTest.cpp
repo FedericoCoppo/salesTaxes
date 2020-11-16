@@ -80,7 +80,7 @@ void ApplicationTest::hardCodedInputCreation()
 // UTest 1: check that all product object has been correctly added in the basket
 void ApplicationTest::testDataStruct()
 {
-	int productObj = shopSheetList_1.GetShoppingNoteListSize();
+	int productObj = shopSheetList_1.GetShoppingNoteListSize() - app_pt->GetDiscardedNotesCnt();
 	assert (p_basket->GetBasketSize() == productObj);
 }
 

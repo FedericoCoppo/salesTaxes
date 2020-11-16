@@ -35,6 +35,9 @@ public:
 	void PrintLine(const char * pt);
 	void PrintString(string s);
 
+	// Getter
+	int GetDiscardedNotesCnt() { return discardedNotesCnt;}
+
 private:
 	bool validateShoppingNote(string s, int * p_number, string * p_name, float * p_price);
 
@@ -43,6 +46,9 @@ private:
 
 	// Minimum digit allowed for product name as input
 	static const int ProducNameCharacterMin;
+
+	// Wrong input notes counter
+	int discardedNotesCnt;
 };
 
 #endif /* APPLICATION_H_ */

@@ -19,7 +19,7 @@ const int Application::ProducNameCharacterMin = 3;
 // Constructor
 Application::Application(void)
 {
-
+	discardedNotesCnt = 0;
 }
 
 // Destructor
@@ -77,6 +77,10 @@ void Application::FillBasketFromShoppingList(ShoppingSheetList *p_shopList, Bask
 				{
 					p_basket->AddProductToBasket(p_productTmp);
 				}
+			}
+			else
+			{
+				discardedNotesCnt++;
 			}
 		}
 	}
