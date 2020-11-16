@@ -147,6 +147,12 @@ bool Application::validateShoppingNote(string s, int * p_number, string * p_name
 					std::cerr << "Invalid argument: " << ia.what() << '\n';
 					res = false;
 				}
+
+				// avoid considering product with price equal zero
+				if (*p_price == 0)
+				{
+					res = false;
+				}
 			}
 			else
 			{

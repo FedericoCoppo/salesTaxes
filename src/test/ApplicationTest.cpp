@@ -193,6 +193,7 @@ void ApplicationTest::hardCodedWrongInputCreated()
 	shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("1 music CD at 3.33x", ShoppingNote::productCategory::genericProduct));
 	shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("-1 cake at 13", ShoppingNote::productCategory::food));
 	shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("1 cake at 13,2", ShoppingNote::productCategory::food));
+	shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("2 book at 0", ShoppingNote::productCategory::book));
 }
 
 // Main test routine for application class
