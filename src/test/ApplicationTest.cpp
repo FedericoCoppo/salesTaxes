@@ -14,7 +14,8 @@
 
 // define
 
-const unsigned char User = 5;
+const unsigned char User = 1;
+const bool WrongInput = false;
 
 // Constructor
 ApplicationTest::ApplicationTest(void)
@@ -47,14 +48,12 @@ void ApplicationTest::hardCodedInputCreation()
 	// switch test input
 	if (User == 1)
 	{
-		p_basket = new Basket("USER 1");
 		shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("2 book at 12.49", ShoppingNote::productCategory::book));
 		shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("1 music CD at 14.99", ShoppingNote::productCategory::genericProduct));
 		shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("1 chocolate bar at 0.85", ShoppingNote::productCategory::food));
 	}
 	else if (User == 2)
 	{
-		p_basket = new Basket("USER 2");
 		p_shopNote = new ShoppingNote("1 imported box of chocolates at 10.00", ShoppingNote::productCategory::food);
 		shopSheetList_1.AddShoppingNoteToList(p_shopNote);
 		p_shopNote = new ShoppingNote("1 imported bottle of perfume at 47.50", ShoppingNote::productCategory::genericProduct);
@@ -62,7 +61,7 @@ void ApplicationTest::hardCodedInputCreation()
 	}
 	else if (User == 3)
 	{
-		p_basket = new Basket("USER 3");
+
 		shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("1 imported bottle of perfume at 27.99", ShoppingNote::productCategory::genericProduct));
 		shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("1 bottle of perfume at 18.99", ShoppingNote::productCategory::genericProduct));
 		shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("1 packet of headache pills at 9.75", ShoppingNote::productCategory::medicine));
@@ -70,15 +69,11 @@ void ApplicationTest::hardCodedInputCreation()
 	}
 	else if (User == 4)
 	{
-		p_basket = new Basket("USER 4");
+
 		shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("1 imported box of chocolates at 10.50", ShoppingNote::productCategory::genericProduct));
 		shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("1 imported bottle of perfume at 54.65", ShoppingNote::productCategory::genericProduct));
 		shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("2 book at 12.495", ShoppingNote::productCategory::medicine));
 		shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("15 box of imported chocolate at 1", ShoppingNote::productCategory::food));
-	}
-	else
-	{
-		p_basket = new Basket("USER 5");
 	}
 }
 
@@ -182,11 +177,36 @@ void ApplicationTest::testReceiptTaxeValues()
 	delete p_receipt;
 }
 
+void ApplicationTest::hardCodedWrongInputCreated()
+{
+	// good
+	shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("1 imported book at 12.49", ShoppingNote::productCategory::book));
+	shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("2 chocolate bar at 1.25", ShoppingNote::productCategory::food));
+	shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("1 cake at 2", ShoppingNote::productCategory::food));
+
+	// bad
+	shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("2x coffè at 1.25", ShoppingNote::productCategory::food));
+	shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("x2 chocolate bar at 1.25", ShoppingNote::productCategory::food));
+	shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("1 music CD at XX", ShoppingNote::productCategory::genericProduct));
+	shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("1 music CD at 3.33x", ShoppingNote::productCategory::genericProduct));
+}
+
 // Main test routine for application class
 void ApplicationTest::Test(void)
 {
-	// input data creation
-	hardCodedInputCreation();
+	// Create the basket
+	p_basket = new Basket("USER " + to_string(User));
+
+	if (WrongInput)
+	{
+		// wrong input data creation
+		hardCodedWrongInputCreated();
+	}
+	else
+	{
+		// correct input data creation
+		hardCodedInputCreation();
+	}
 
 	// from input data to basket
 	app_pt->FillBasketFromShoppingList(&shopSheetList_1, p_basket);

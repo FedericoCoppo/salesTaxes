@@ -26,6 +26,7 @@ private:
 	void testDataStruct();
 	void testCalculatedTaxeValues();
 	void testReceiptTaxeValues();
+	void hardCodedWrongInputCreated();
 
 	Application * app_pt;
 	ShoppingNote * p_shopNote;

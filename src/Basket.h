@@ -20,7 +20,7 @@ using namespace std;
 class Basket
 {
 public:
-	Basket(const char * p_name);
+	Basket(string nameStr);
 	virtual ~Basket(void);
 	void AddProductToBasket(GenericProduct * pt);
 	void RemoveAllProductFromBasket();
@@ -28,11 +28,11 @@ public:
 	// Getter
 	GenericProduct * GetProduct (int idx);
 	int GetBasketSize(){ return productList.size(); }
-	const char * GetName() { return pt_name; }
+	string GetName() { return name; }
 
 private:
 	list <GenericProduct *> productList;
-	const char * pt_name;
+	string name;
 };
 
 
