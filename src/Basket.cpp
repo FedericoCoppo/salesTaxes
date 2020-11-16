@@ -17,7 +17,8 @@ Basket::Basket(const char * p_name)
 // Dest.
 Basket::~Basket(void)
 {
-	productList.clear();
+	// In case forgotten by user...
+	RemoveAllProductFromBasket();
 }
 
 // Add a new product to shopping basket
@@ -25,8 +26,25 @@ void Basket::AddProductToBasket(GenericProduct * pt)
 {
 	if (pt)
 	{
-		productList.push_back(*pt);
+		productList.push_back(pt);
 	}
+}
+
+// it remove all product from basket
+void Basket::RemoveAllProductFromBasket()
+{
+	int max = GetBasketSize();
+	for (int i = 0; i < max; i++)
+	{
+		GenericProduct * p_prod = GetProduct(i);
+
+		if (p_prod)
+		{
+			delete p_prod;
+		}
+	}
+
+	productList.clear();
 }
 
 // Get product at specific index
@@ -34,12 +52,12 @@ GenericProduct * Basket::GetProduct (int idx)
 {
 	if (idx < GetBasketSize())
 	{
-	    list<GenericProduct>::iterator it = productList.begin();
-	    for(int i=0; i< idx; i++)
+	    list<GenericProduct *>::iterator it = productList.begin();
+	    for(int i = 0; i < idx; i++)
 	    {
 	        ++it;
 	    }
-	    return &(*it);
+	    return *it;
 	}
 	else
 	{

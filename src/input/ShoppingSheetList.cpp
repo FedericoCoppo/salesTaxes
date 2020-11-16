@@ -18,7 +18,8 @@ ShoppingSheetList::ShoppingSheetList()
 // Dest.
 ShoppingSheetList::~ShoppingSheetList(void)
 {
-	noteList.clear();
+	// In case forgoten by user...
+	RemoveAllNoteFromShoppingList();
 }
 
 // Adds a new product note to the shopping list
@@ -26,20 +27,44 @@ void ShoppingSheetList::AddShoppingNoteToList(ShoppingNote * pt)
 {
 	if (pt)
 	{
-		noteList.push_back(*pt);
+		noteList.push_back(pt);
 	}
 }
 
-// Keep note info from the shopping list
-ShoppingNote * ShoppingSheetList::ExtractShoppingNoteFromList(int idx)
+// it remove all product from basket
+void ShoppingSheetList::RemoveAllNoteFromShoppingList()
 {
-    list<ShoppingNote>::iterator it = noteList.begin();
+	int max = GetShoppingNoteListSize();
+	for (int i = 0; i < max; i++)
+	{
+		ShoppingNote * p_note = GetShoppingNote(i);
 
-    for(int i=0; i< idx; i++)
-    {
-        ++it;
-    }
+		if (p_note)
+		{
+			delete p_note;
+		}
+	}
 
-    return &(*it);
+	noteList.clear();
 }
 
+
+// Keep note info from the shopping list
+ShoppingNote * ShoppingSheetList::GetShoppingNote(int idx)
+{
+	if (idx < GetShoppingNoteListSize())
+	{
+	    list<ShoppingNote *>::iterator it = noteList.begin();
+
+	    for(int i=0; i< idx; i++)
+	    {
+	        ++it;
+	    }
+
+	    return *it;
+	}
+	else
+	{
+		return NULL;
+	}
+}

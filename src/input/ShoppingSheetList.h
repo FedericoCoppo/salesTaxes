@@ -22,13 +22,14 @@ public:
 	ShoppingSheetList();
 	virtual ~ShoppingSheetList();
 	void AddShoppingNoteToList(ShoppingNote * pt);
-	ShoppingNote * ExtractShoppingNoteFromList(int idx);
+	ShoppingNote * GetShoppingNote(int idx);
+	void RemoveAllNoteFromShoppingList();
 
 	// Getter
 	int GetShoppingNoteListSize() { return noteList.size(); }
 
 private:
-	list <ShoppingNote> noteList;
+	list <ShoppingNote *> noteList;
 };
 
 #endif /* SHOPPINGSHEETLIST_H_ */

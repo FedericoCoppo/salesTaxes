@@ -21,13 +21,14 @@ public:
 	Basket(const char * p_name);
 	virtual ~Basket(void);
 	void AddProductToBasket(GenericProduct * pt);
+	void RemoveAllProductFromBasket();
 
 	// Getter
 	int GetBasketSize(){ return productList.size(); }
 	GenericProduct * GetProduct (int idx);
 	const char * GetName() { return pt_name; }
 private:
-	list <GenericProduct> productList;
+	list <GenericProduct *> productList;
 	const char * pt_name;
 };
 
