@@ -32,6 +32,7 @@ ApplicationTest::~ApplicationTest(void)
 	if (p_basket)
 	{
 		delete p_basket;
+		p_basket = NULL;
 	}
 }
 
@@ -183,5 +184,14 @@ void ApplicationTest::Test(void)
 	testDataStruct();
 	testCalculatedTaxeValues();
 	testReceiptTaxeValues();
+
+	// Clear shopping list from notes
+	shopSheetList_1.RemoveAllNoteFromShoppingList();
+
+	// Clear basket from product
+	app_pt->ClearBasketFromAllProduct(p_basket);
+
+	delete p_basket;
+	p_basket = NULL;
 }
 

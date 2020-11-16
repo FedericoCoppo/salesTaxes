@@ -31,10 +31,16 @@ void Application::FillBasketFromShoppingList(ShoppingSheetList *p_shopList, Bask
 {
 	ShoppingNote * p_shopNoteTmp;
 	GenericProduct * p_productTmp;
+	int ShopListSize = 0;
 
-	for (int i = 0; i < p_shopList->GetShoppingNoteListSize(); i++)
+	if (p_shopList)
 	{
-		p_shopNoteTmp = p_shopList->ExtractShoppingNoteFromList(i);
+		ShopListSize = p_shopList->GetShoppingNoteListSize();
+	}
+
+	for (int i = 0; i < ShopListSize; i++)
+	{
+		p_shopNoteTmp = p_shopList->GetShoppingNote(i);
 
 		if (p_shopNoteTmp)
 		{
@@ -63,11 +69,23 @@ void Application::FillBasketFromShoppingList(ShoppingSheetList *p_shopList, Bask
 				}
 
 				// add product to basket
-				p_basket->AddProductToBasket(p_productTmp);
+				if (p_basket)
+				{
+					p_basket->AddProductToBasket(p_productTmp);
+				}
 			}
 
 			// remove your note -> TBD
 		}
+	}
+}
+
+// Clear the basket from product
+void Application::ClearBasketFromAllProduct(Basket * p_basket)
+{
+	if (p_basket)
+	{
+		p_basket->RemoveAllProductFromBasket();
 	}
 }
 
