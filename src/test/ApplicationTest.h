@@ -20,6 +20,7 @@ public:
 	ApplicationTest(void);
 	virtual ~ApplicationTest(void);
 	void Test(void);
+	void ClearShoppingSheet(ShoppingSheetList * p_list);
 
 private:
 	void hardCodedInputCreation();
@@ -36,7 +37,7 @@ private:
 	Basket * p_basket;
 	Receipt * p_receipt;
 
-	ShoppingSheetList shopSheetList_1;
+	ShoppingSheetList * p_shopSheetList;
 };
 
 #endif /* TEST_APPLICATIONTEST_H_ */
