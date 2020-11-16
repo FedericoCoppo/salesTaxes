@@ -18,13 +18,14 @@
 ApplicationTest::ApplicationTest(void)
 {
 	app_pt = new Application();
-	p_shopSheetList = NULL;
-	p_basket = NULL;
-	p_receipt = NULL;
+
+	// Link with basket and receipt
+	p_basket = app_pt->GetBasket();
+	p_receipt = app_pt->GetReceipt();
 
 	// Create input and link with the application
-	p_input = new InputProvider();
-	p_shopSheetList = p_input->InputCreate();
+	p_input = app_pt->GetInputProvider();
+	p_shopSheetList = app_pt->GetInputShoppingSheetList();
 }
 
 // Destructor
@@ -37,24 +38,9 @@ ApplicationTest::~ApplicationTest(void)
 		app_pt = NULL;
 	}
 
-	if (p_basket)
-	{
-		delete p_basket;
-		p_basket = NULL;
-	}
-
-	if (p_receipt)
-	{
-		delete p_receipt;
-		p_receipt = NULL;
-	}
-
-	if (p_input)
-	{
-		delete p_input;
-		p_input = NULL;
-	}
-
+	p_basket = NULL;
+	p_receipt = NULL;
+	p_input = NULL;
 	p_shopSheetList = NULL;
 }
 
@@ -76,8 +62,7 @@ void ApplicationTest::testCalculatedTaxesValues()
 		// test for multiple taxes calculation on same product
 		p->CalculateTaxes();
 
-		// Check if all imported product are correctly marked:
-		// it is same of unit test but product come form basket container
+		// Check if imported products are marked (like in the unit test but here the product come from basket)
 		if ((p->GetName().find("imported") != std::string::npos))
 		{
 			assert(p_basket->GetProduct(i)->GetIsImported() == true);
@@ -227,10 +212,6 @@ void ApplicationTest::Test(void)
 	// UTest: test shopping list
 	testShoppingSheetList();
 
-	// Create Basket and Receipt
-	p_basket = new Basket("USER " + to_string(p_input->GetUser()));
-	p_receipt = new Receipt(p_basket);
-
 	// Fill basket with data input
 	app_pt->FillBasketFromShoppingList(p_shopSheetList, p_basket);
 
@@ -238,13 +219,5 @@ void ApplicationTest::Test(void)
 	testDataStruct();
 	testCalculatedTaxesValues();
 	testReceipt();
-
-	// Free memory
-	app_pt->ClearBasket(p_basket);
-	delete p_basket;
-	p_basket = NULL;
-
-	delete p_receipt;
-	p_receipt = NULL;
 }
 

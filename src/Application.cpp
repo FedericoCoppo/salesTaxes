@@ -21,12 +21,43 @@ const int Application::ProducNameCharacterMin = 3;
 Application::Application(void)
 {
 	discardedNotesCnt = 0;
+	p_basket = NULL;
+	p_receipt = NULL;
+
+	// Create input and link with the application
+	p_input = new InputProvider();
+	p_shopSheetList = p_input->InputCreate();
+
+	// Create Basket
+	p_basket = new Basket("USER " + to_string(p_input->GetUser()));
+
+	//  Create Receipt
+	p_receipt = new Receipt(p_basket);
 }
 
 // Destructor
 Application::~Application(void)
 {
+	if (p_input)
+	{
+		delete p_input;
+		p_input = NULL;
+	}
 
+	p_shopSheetList = NULL;
+
+	if (p_basket)
+	{
+		ClearBasket();
+		delete p_basket;
+		p_basket = NULL;
+	}
+
+	if (p_receipt)
+	{
+		delete p_receipt;
+		p_receipt = NULL;
+	}
 }
 
 // Fill the buffer with products converted from shopping list
@@ -88,7 +119,7 @@ void Application::FillBasketFromShoppingList(ShoppingSheetList *p_shopList, Bask
 }
 
 // Clear the basket from product
-void Application::ClearBasket(Basket * p_basket)
+void Application::ClearBasket()
 {
 	// remove the product
 	if (p_basket)
