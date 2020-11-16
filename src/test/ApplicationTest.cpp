@@ -217,7 +217,7 @@ void ApplicationTest::testReceipt()
 	p_receipt->PrintReceipt();
 }
 
-// Test product class
+// Test Product class
 void ApplicationTest::testProduct(void)
 {
 	// unit test on product
@@ -260,11 +260,35 @@ void ApplicationTest::testProduct(void)
 	delete p_testFood;
 }
 
+// Test the Shopping sheet list class
+void ApplicationTest::testShoppingSheetList()
+{
+	ShoppingSheetList * p_shopSheetList = new ShoppingSheetList();
+	ShoppingNote * p_note1 = new ShoppingNote("1 imported pen at 5.49", ShoppingNote::productCategory::genericProduct);
+	ShoppingNote * p_note2 = new ShoppingNote("2 imported pills at 5.49", ShoppingNote::productCategory::medicine);
+	p_shopSheetList->AddShoppingNoteToList(p_note1);
+	p_shopSheetList->AddShoppingNoteToList(p_note2);
+
+	// Check that notes are pushed inside the list
+	assert(p_shopSheetList->GetShoppingNoteListSize() == 2);
+
+	// Free memory
+	p_shopSheetList->RemoveAllNoteFromShoppingList();
+
+	// check the list is empty
+	assert(p_shopSheetList->GetShoppingNoteListSize() == 0);
+
+	delete p_shopSheetList;
+}
+
 // Main test routine for application class
 void ApplicationTest::Test(void)
 {
 	// UTest: test the product class
 	testProduct();
+
+	// UTest: test shopping list
+	testShoppingSheetList();
 
 	generateInput();
 

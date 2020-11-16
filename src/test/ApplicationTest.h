@@ -24,6 +24,7 @@ public:
 private:
 	void hardCodedInputCreation();
 	void testProduct();
+	void testShoppingSheetList();
 	void testDataStruct();
 	void testCalculatedTaxesValues();
 	void testReceipt();
