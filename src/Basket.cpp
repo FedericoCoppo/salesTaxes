@@ -9,9 +9,9 @@
 #include "Basket.h"
 
 // Constructor
-Basket::Basket(const char * p_name)
+Basket::Basket(string nameStr)
 {
-	pt_name = p_name;
+	name = nameStr;
 }
 
 // Destructor
