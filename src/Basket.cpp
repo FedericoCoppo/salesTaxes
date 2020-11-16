@@ -17,8 +17,8 @@ Basket::Basket(string nameStr)
 // Destructor
 Basket::~Basket(void)
 {
-	// In case forgotten by user...
-	RemoveAllProductFromBasket();
+	// Clear the list if not already done by user
+	productList.clear();
 }
 
 // Add a new product object to shopping basket
@@ -31,19 +31,8 @@ void Basket::AddProductToBasket(GenericProduct * pt)
 }
 
 // Remove all product from basket
-void Basket::RemoveAllProductFromBasket()
+void Basket::ClearProductFromBasket()
 {
-	int max = GetBasketSize();
-	for (int i = 0; i < max; i++)
-	{
-		GenericProduct * p_prod = GetProduct(i);
-
-		if (p_prod)
-		{
-			delete p_prod;
-		}
-	}
-
 	productList.clear();
 }
 

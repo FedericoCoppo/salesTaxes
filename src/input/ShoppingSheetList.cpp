@@ -17,8 +17,8 @@ ShoppingSheetList::ShoppingSheetList()
 // Destructor
 ShoppingSheetList::~ShoppingSheetList(void)
 {
-	// Clear the list if not already done by user..
-	RemoveAllNoteFromShoppingList();
+	// Clear the list if not already done by user
+	noteList.clear();
 }
 
 // Insert a new product note in the shopping list
@@ -31,19 +31,8 @@ void ShoppingSheetList::AddShoppingNoteToList(ShoppingNote * pt)
 }
 
 // Remove all note from shopping list
-void ShoppingSheetList::RemoveAllNoteFromShoppingList()
+void ShoppingSheetList::ClearNoteFromShoppingList()
 {
-	int max = GetShoppingNoteListSize();
-	for (int i = 0; i < max; i++)
-	{
-		ShoppingNote * p_note = GetShoppingNote(i);
-
-		if (p_note)
-		{
-			delete p_note;
-		}
-	}
-
 	noteList.clear();
 }
 

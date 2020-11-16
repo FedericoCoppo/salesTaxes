@@ -23,7 +23,7 @@ public:
 	ShoppingSheetList();
 	virtual ~ShoppingSheetList();
 	void AddShoppingNoteToList(ShoppingNote * pt);
-	void RemoveAllNoteFromShoppingList();
+	void ClearNoteFromShoppingList();
 
 	// Getter
 	ShoppingNote * GetShoppingNote(int idx);

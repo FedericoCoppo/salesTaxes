@@ -88,12 +88,26 @@ void Application::FillBasketFromShoppingList(ShoppingSheetList *p_shopList, Bask
 }
 
 // Clear the basket from product
-void Application::ClearBasketFromAllProduct(Basket * p_basket)
+void Application::ClearBasket(Basket * p_basket)
 {
+	// remove the product
 	if (p_basket)
 	{
-		p_basket->RemoveAllProductFromBasket();
+		int max = p_basket->GetBasketSize();
+
+		for (int i = 0; i < max; i++)
+		{
+			GenericProduct * p_prod = p_basket->GetProduct(i);
+
+			if (p_prod)
+			{
+				delete p_prod;
+			}
+		}
 	}
+
+	// clear the list
+	p_basket->ClearProductFromBasket();
 }
 
 //  Validate the shopping list note

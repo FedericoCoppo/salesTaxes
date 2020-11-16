@@ -23,7 +23,7 @@ public:
 	Basket(string nameStr);
 	virtual ~Basket(void);
 	void AddProductToBasket(GenericProduct * pt);
-	void RemoveAllProductFromBasket();
+	void ClearProductFromBasket();
 
 	// Getter
 	GenericProduct * GetProduct (int idx);

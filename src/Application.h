@@ -31,7 +31,7 @@ public:
 	Application(void);
 	virtual ~Application(void);
 	void FillBasketFromShoppingList(ShoppingSheetList *p_shopList, Basket * p_basket);
-	void ClearBasketFromAllProduct(Basket * p_basket);
+	void ClearBasket(Basket * p_basket);
 	void PrintLine(const char * pt);
 	void PrintString(string s);
 
