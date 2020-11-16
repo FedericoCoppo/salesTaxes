@@ -14,19 +14,17 @@
 
 #include "applicationTest.h"
 
-// static labels
-static const unsigned char User = 1;
-static const bool WrongInput = false;
-
 // Constructor
 ApplicationTest::ApplicationTest(void)
 {
 	app_pt = new Application();
-	p_shopSheetList = new ShoppingSheetList();
-	p_shopNote = NULL;
+	p_shopSheetList = NULL;
 	p_basket = NULL;
 	p_receipt = NULL;
 
+	// Create input and link with the application
+	p_input = new InputProvider();
+	p_shopSheetList = p_input->InputCreate();
 }
 
 // Destructor
@@ -51,96 +49,13 @@ ApplicationTest::~ApplicationTest(void)
 		p_receipt = NULL;
 	}
 
-	if (p_shopSheetList)
+	if (p_input)
 	{
-		delete p_shopSheetList;
-		p_shopSheetList = NULL;
-	}
-}
-
-void ApplicationTest::ClearShoppingSheet(ShoppingSheetList * p_list)
-{
-	int max = p_list->GetShoppingNoteListSize();
-	for (int i = 0; i < max; i++)
-	{
-		ShoppingNote * p_note = p_list->GetShoppingNote(i);
-
-		if (p_note)
-		{
-			delete p_note;
-		}
+		delete p_input;
+		p_input = NULL;
 	}
 
-	p_list->ClearNoteFromShoppingList();
-}
-
-// Hard coded input data creation
-void ApplicationTest::hardCodedInputCreation()
-{
-	// switch test input
-	if (User == 1)
-	{
-		p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("2 book at 12.49", ShoppingNote::productCategory::book));
-		p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("1 music CD at 14.99", ShoppingNote::productCategory::genericProduct));
-		p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("1 chocolate bar at 0.85", ShoppingNote::productCategory::food));
-	}
-	else if (User == 2)
-	{
-		p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("1 imported box of chocolates at 10.00", ShoppingNote::productCategory::food));
-		p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("1 imported bottle of perfume at 47.50", ShoppingNote::productCategory::genericProduct));
-	}
-	else if (User == 3)
-	{
-
-		p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("1 imported bottle of perfume at 27.99", ShoppingNote::productCategory::genericProduct));
-		p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("1 bottle of perfume at 18.99", ShoppingNote::productCategory::genericProduct));
-		p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("1 packet of headache pills at 9.75", ShoppingNote::productCategory::medicine));
-		p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("3 box of imported chocolates at 11.25", ShoppingNote::productCategory::food));
-	}
-	else if (User == 4)
-	{
-
-		p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("1 imported box of chocolates at 10.50", ShoppingNote::productCategory::genericProduct));
-		p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("1 imported bottle of perfume at 54.65", ShoppingNote::productCategory::genericProduct));
-		p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("2 book at 12.495", ShoppingNote::productCategory::medicine));
-		p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("15 box of imported chocolate at 1", ShoppingNote::productCategory::food));
-	}
-}
-
-// Hard coded input wron data creation
-void ApplicationTest::hardCodedWrongInputCreated()
-{
-	// good input
-	p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("1 imported book at 12.49", ShoppingNote::productCategory::book));
-	p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("2 chocolate bar at 1.25", ShoppingNote::productCategory::food));
-	p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("1 cake at 2", ShoppingNote::productCategory::food));
-	p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("1 milk at 1.", ShoppingNote::productCategory::food));
-	p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("1 coke at .2", ShoppingNote::productCategory::food));
-
-	// bad input
-	p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("2x coffè at 1.25", ShoppingNote::productCategory::food));
-	p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("x2 chocolate bar at 1.25", ShoppingNote::productCategory::food));
-	p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("1 music CD at XX", ShoppingNote::productCategory::genericProduct));
-	p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("1 music CD at 3.33x", ShoppingNote::productCategory::genericProduct));
-	p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("-1 cake at 13", ShoppingNote::productCategory::food));
-	p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("1 cake at 13,2", ShoppingNote::productCategory::food));
-	p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("2 book at 0", ShoppingNote::productCategory::book));
-}
-
-// Input generation
-void ApplicationTest::generateInput(void)
-{
-	// Create input
-	if (WrongInput)
-	{
-		// wrong input data creation
-		hardCodedWrongInputCreated();
-	}
-	else
-	{
-		// correct input data creation
-		hardCodedInputCreation();
-	}
+	p_shopSheetList = NULL;
 }
 
 // Check that all product object has been correctly added in the basket
@@ -312,12 +227,8 @@ void ApplicationTest::Test(void)
 	// UTest: test shopping list
 	testShoppingSheetList();
 
-	generateInput();
-
-	// Create the basket
-	p_basket = new Basket("USER " + to_string(User));
-
-	// Create Receipt
+	// Create Basket and Receipt
+	p_basket = new Basket("USER " + to_string(p_input->GetUser()));
 	p_receipt = new Receipt(p_basket);
 
 	// Fill basket with data input
@@ -329,13 +240,6 @@ void ApplicationTest::Test(void)
 	testReceipt();
 
 	// Free memory
-
-	// Remove ShoppingSheetlist nodes
-	ClearShoppingSheet(p_shopSheetList);
-	delete p_shopSheetList;
-	p_shopSheetList = NULL;
-
-	// Remove nBasket product
 	app_pt->ClearBasket(p_basket);
 	delete p_basket;
 	p_basket = NULL;

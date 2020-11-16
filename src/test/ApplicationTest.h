@@ -12,6 +12,7 @@
 #include "Application.h"
 #include "ShoppingNote.h"
 #include "ShoppingSheetList.h"
+#include "InputProvider.h"
 
 // Test application class
 class ApplicationTest
@@ -20,24 +21,19 @@ public:
 	ApplicationTest(void);
 	virtual ~ApplicationTest(void);
 	void Test(void);
-	void ClearShoppingSheet(ShoppingSheetList * p_list);
 
 private:
-	void hardCodedInputCreation();
 	void testProduct();
 	void testShoppingSheetList();
 	void testDataStruct();
 	void testCalculatedTaxesValues();
 	void testReceipt();
-	void hardCodedWrongInputCreated();
-	void generateInput(void);
 
 	Application * app_pt;
-	ShoppingNote * p_shopNote;
 	Basket * p_basket;
 	Receipt * p_receipt;
-
 	ShoppingSheetList * p_shopSheetList;
+	InputProvider * p_input;
 };
 
 #endif /* TEST_APPLICATIONTEST_H_ */
