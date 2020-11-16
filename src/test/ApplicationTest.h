@@ -23,14 +23,17 @@ public:
 
 private:
 	void hardCodedInputCreation();
+	void testProduct();
 	void testDataStruct();
-	void testCalculatedTaxeValues();
-	void testReceiptTaxeValues();
+	void testCalculatedTaxesValues();
+	void testReceipt();
 	void hardCodedWrongInputCreated();
+	void generateInput(void);
 
 	Application * app_pt;
 	ShoppingNote * p_shopNote;
 	Basket * p_basket;
+	Receipt * p_receipt;
 
 	ShoppingSheetList shopSheetList_1;
 };
