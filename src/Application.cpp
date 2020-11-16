@@ -106,7 +106,7 @@ bool Application::validateShoppingNote(string s, int * p_number, string * p_name
 	string numStr = s.substr(0, s.find(" "));
 	stringstream ssNum(numStr);
 
-	if (isValidNumber(ssNum.str()))
+	if (isValidPrice(ssNum.str()))
 	{
 		ssNum >> num;
 		*p_number = num;
@@ -135,7 +135,7 @@ bool Application::validateShoppingNote(string s, int * p_number, string * p_name
 			// get the product price
 			string priceStr = s.erase(0, nameStr.length() + 4);
 
-			if (isValidNumber(priceStr))
+			if (isValidPrice(priceStr))
 			{
 				// avoid wrong format price input
 				try
@@ -158,10 +158,17 @@ bool Application::validateShoppingNote(string s, int * p_number, string * p_name
 	return res;
 }
 
-// Routine to check if string is a number
-bool Application::isValidNumber(const std::string &s)
+// Routine to check if string is a valid product number
+bool Application::isValidProductNumber(const std::string &s)
 {
-  return( strspn( s.c_str(), "-.0123456789" ) == s.size() );
+	return( strspn( s.c_str(), "0123456789" ) == s.size() );
+}
+
+// Routine to check if string is a number valid for price
+bool Application::isValidPrice(const std::string &s)
+{
+	// "1." are valid for 1.0; ".5" is valid for 0.5
+	return( strspn( s.c_str(), ".0123456789" ) == s.size() );
 }
 
 // Print method with standard output flush for char *

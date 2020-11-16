@@ -40,7 +40,8 @@ public:
 
 private:
 	bool validateShoppingNote(string s, int * p_number, string * p_name, float * p_price);
-	bool isValidNumber(const std::string &s);
+	bool isValidProductNumber(const std::string &s);
+	bool isValidPrice(const std::string &s);
 
 	// Max product number allowed as input
 	static const int ProductNumberMax;
