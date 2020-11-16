@@ -183,12 +183,16 @@ void ApplicationTest::hardCodedWrongInputCreated()
 	shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("1 imported book at 12.49", ShoppingNote::productCategory::book));
 	shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("2 chocolate bar at 1.25", ShoppingNote::productCategory::food));
 	shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("1 cake at 2", ShoppingNote::productCategory::food));
+	shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("1 milk at 1.", ShoppingNote::productCategory::food));
+	shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("1 coke at .2", ShoppingNote::productCategory::food));
 
 	// bad
 	shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("2x coffè at 1.25", ShoppingNote::productCategory::food));
 	shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("x2 chocolate bar at 1.25", ShoppingNote::productCategory::food));
 	shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("1 music CD at XX", ShoppingNote::productCategory::genericProduct));
 	shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("1 music CD at 3.33x", ShoppingNote::productCategory::genericProduct));
+	shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("-1 cake at 13", ShoppingNote::productCategory::food));
+	shopSheetList_1.AddShoppingNoteToList(new ShoppingNote("1 cake at 13,2", ShoppingNote::productCategory::food));
 }
 
 // Main test routine for application class
