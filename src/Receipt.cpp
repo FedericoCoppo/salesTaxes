@@ -57,7 +57,7 @@ void Receipt::PrintReceipt ()
 		{
 			// product number
 			std::stringstream streamNumberOfProduct;
-			streamNumberOfProduct << std::fixed << std::setprecision(2) << p_basket->GetProduct(i)->GetProductNumber();
+			streamNumberOfProduct << std::fixed << std::setprecision(2) << p_basket->GetProduct(i)->GetQuantity();
 			printString(streamNumberOfProduct.str() + " ");
 
 			// product name

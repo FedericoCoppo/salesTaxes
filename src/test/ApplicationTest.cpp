@@ -102,7 +102,7 @@ void ApplicationTest::testCalculatedTaxesValues()
 		testTax = ceil(testTax*20)*0.05;
 
 		// consider the number of that product
-		testTax *= p->GetProductNumber();
+		testTax *= p->GetQuantity();
 
 		// compare test calculated with the specific product tax field calculated
 		assert( ( int (p->GetTaxes()*100) == int (testTax*100) ));
@@ -117,7 +117,7 @@ void ApplicationTest::testReceipt()
 	for (int i = 0; i < p_basket->GetBasketSize(); i++)
 	{
 		GenericProduct * p = p_basket->GetProduct(i);
-		for (int j = 0; j < p->GetProductNumber(); j++)
+		for (int j = 0; j < p->GetQuantity(); j++)
 		{
 			totalPrice += p->GetPrice();
 		}
@@ -153,7 +153,7 @@ void ApplicationTest::testProduct(void)
 	p_testFood = new Food("testProduct", prodNum, initPrice);
 
 	// check the attribute
-	assert ( p_testProd->GetProductNumber() == prodNum);
+	assert ( p_testProd->GetQuantity() == prodNum);
 	assert ( p_testProd->GetPrice( ) == initPrice);
 
 	// test 1 round utility

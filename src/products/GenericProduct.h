@@ -17,7 +17,7 @@ using namespace std;
 class GenericProduct
 {
 public:
-	GenericProduct(string prodName, int prodNum, float prodPrice);
+	GenericProduct(string prodName, int prodQuantity, float prodPrice);
 	virtual ~GenericProduct(void);
 	float CalculateTaxes();
 	float RoundUpTo05(float num);
@@ -29,14 +29,14 @@ public:
 	float GetTaxes() { return taxes; }
 	float GetIsBasicSalesTaxed() { return isBasicSalesTaxed; }
 	float GetTaxedPrice() { return taxedPrice; }
-	int GetProductNumber() { return productNumber; }
+	int GetQuantity() { return quantity; }
 
 protected:
 	bool isBasicSalesTaxed = false;
 
 private:
 	string name;
-	int productNumber;
+	int quantity;
 	float price;
 	float taxedPrice;
 	float taxes;

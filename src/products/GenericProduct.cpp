@@ -14,10 +14,10 @@
 #include "GenericProduct.h"
 
 // Constructor
-GenericProduct::GenericProduct(string prodName, int prodNum, float prodPrice)
+GenericProduct::GenericProduct(string prodName, int prodQuantity, float prodPrice)
 {
 	name = prodName;
-	productNumber = prodNum;
+	quantity = prodQuantity;
 	price = prodPrice;
 	taxedPrice = price;
 	taxes = 0.0;
@@ -57,14 +57,14 @@ float GenericProduct::CalculateTaxes()
 		}
 
 		// consider the number of items
-		for (int i = 0; i < productNumber; i++ )
+		for (int i = 0; i < quantity; i++ )
 		{
 			rawTaxes = taxesPct*price;
 			roundedTaxes = RoundUpTo05(rawTaxes);
 			taxes += roundedTaxes;
 		}
 
-		taxedPrice = price*productNumber + taxes;
+		taxedPrice = price*quantity + taxes;
 	}
 
 	return taxes;
