@@ -28,13 +28,17 @@ private:
 	void testDataStruct();
 	void testCalculatedTaxesValues();
 	void testReceipt();
-	void testDifferentInputSource();
+	void testDifferentInputSource(int testCnt);
+	void configureTest(int testCnt);
+	void clearApplicationTest();
 
 	Application * app_pt;
 	Basket * p_basket;
 	Receipt * p_receipt;
 	ShoppingSheetList * p_shopSheetList;
 	InputProvider * p_input;
+
+	static const unsigned char inputSourceMax;
 };
 
 #endif /* TEST_APPLICATIONTEST_H_ */
