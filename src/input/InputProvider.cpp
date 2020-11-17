@@ -12,6 +12,7 @@
 #include <string>
 #include <algorithm>
 #include <sstream>
+#include <regex>
 
 #include "InputProvider.h"
 
@@ -164,8 +165,16 @@ bool InputProvider::fileCatVocabularyReader (const char * path)
 
 		while(getline(vocabularyFile, line))
 		{
+			// replace \t with space to consider also file with wrong format
+			line = std::regex_replace(line, std::regex("\\t"), " ");
+
 			prodName = line.substr(0, line.find(" "));
 			prodCategory = line.erase(0, prodName.length() + 1);
+
+			// remove spurious space
+			prodName = std::regex_replace(prodName, std::regex(" "), "");
+			prodCategory = std::regex_replace(prodCategory, std::regex(" "), "");
+
 			prodCategory = convertStringToUpper(prodCategory);
 
 			// Remove spaces
