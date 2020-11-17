@@ -10,6 +10,7 @@
 
 // include
 #include "ShoppingSheetList.h"
+#include <map>
 
 using namespace std;
 
@@ -17,21 +18,37 @@ using namespace std;
 class InputProvider
 {
 public:
+
+	// input source
+	typedef enum
+	{
+		hardCoded,
+		file,
+	} InputSource;
+
 	InputProvider();
 	virtual ~InputProvider();
-	ShoppingSheetList * InputCreate();
-	int GetUser() { return User; }
+	ShoppingSheetList * InputCreate(InputSource inSource, const char * inputPath = NULL, const char * vocabPath = NULL);
+	int GetUser() { return UserTestID; }
 
 private:
 	void hardCodedInputCreate();
 	void hardCodedWrongInputCreate();
+	bool fileInputReader (const char * path);
+	bool fileCatVocabularyReader (const char * path);
+	bool getNoteCategory(string note, ShoppingNote::productCategory * cat);
 	void clearShoppingSheet(ShoppingSheetList * p_list);
+	static string convertStringToUpper(string s);
 
+	InputSource source;
+	bool isInputCreated;
+	bool isCategoryVocabularyOpened;
 	ShoppingSheetList * p_shopSheetList;
-	bool isCreated;
+	map <string,string> MapProductCategory;
 
-	// configuration parameter
-	static const unsigned char User;
-	static const bool WrongInput;
+	// configuration static parameter
+	static const unsigned char UserTestID;
+	static const bool WrongHardCodedInput;
 };
+
 #endif /* INPUTPROVIDER_H_ */
