@@ -30,6 +30,7 @@ public:
 	virtual ~InputProvider();
 	ShoppingSheetList * InputCreate(InputSource inSource, const char * inputPath = NULL, const char * vocabPath = NULL);
 	int GetUser() { return UserTestID; }
+	int GetMapProductCategorySize() { return MapProductCategory.size(); }
 
 private:
 	void hardCodedInputCreate();
