@@ -29,7 +29,7 @@ using namespace std;
 class Application
 {
 public:
-	Application(void);
+	Application(InputProvider::InputSource source = InputProvider::hardCoded, const char * sourcePath = NULL, const char * vocabPath = NULL);
 	virtual ~Application(void);
 	void FillBasketFromShoppingList(ShoppingSheetList *p_shopList, Basket * p_basket);
 	void ClearBasket();

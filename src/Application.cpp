@@ -18,7 +18,7 @@ const int Application::ProductNumberMax = 1000;
 const int Application::ProducNameCharacterMin = 3;
 
 // Constructor
-Application::Application(void)
+Application::Application(InputProvider::InputSource source, const char * sourcePath, const char * vocabPath)
 {
 	discardedNotesCnt = 0;
 	p_basket = NULL;
@@ -26,7 +26,7 @@ Application::Application(void)
 
 	// Create input and link with the application
 	p_input = new InputProvider();
-	p_shopSheetList = p_input->InputCreate();
+	p_shopSheetList = p_input->InputCreate(source, sourcePath, vocabPath);
 
 	// Create Basket
 	p_basket = new Basket("USER " + to_string(p_input->GetUser()));
@@ -194,7 +194,7 @@ bool Application::validateShoppingNote(string s, int * p_number, string * p_name
 				}
 
 				// avoid considering product with price equal zero
-				if (*p_price == 0)
+				if ( (res == true) && (*p_price == 0))
 				{
 					res = false;
 				}
