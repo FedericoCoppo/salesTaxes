@@ -28,6 +28,7 @@ private:
 	void testDataStruct();
 	void testCalculatedTaxesValues();
 	void testReceipt();
+	void testDifferentInputSource();
 
 	Application * app_pt;
 	Basket * p_basket;
