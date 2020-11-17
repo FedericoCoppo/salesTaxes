@@ -46,14 +46,15 @@ void Receipt::PrintReceipt ()
 {
 	if (p_basket)
 	{
-		printLine(p_basket->GetName());
 
 		std::stringstream streamTotalTaxes;
 		streamTotalTaxes << std::fixed << std::setprecision(2) << totalSalesTaxes;
 		std::stringstream streamTotal;
 		streamTotal << std::fixed << std::setprecision(2) << total;
 
-		for (int i = 0; i < p_basket->GetBasketSize(); i++)
+		int maxSize = p_basket->GetBasketSize();
+
+		for (int i = 0; i < maxSize; i++)
 		{
 			// product number
 			std::stringstream streamNumberOfProduct;
@@ -69,13 +70,20 @@ void Receipt::PrintReceipt ()
 			printLine(streamTaxedPrice.str());
 		}
 
-		// shopping totale sales taxes
-		printString("Sales Taxes: ");
-		printLine(streamTotalTaxes.str());
+		if (maxSize > 0)
+		{
+			// shopping totale sales taxes
+			printString("Sales Taxes: ");
+			printLine(streamTotalTaxes.str());
 
-		// shopping total price
-		printString("Total: ");
-		printLine(streamTotal.str());
+			// shopping total price
+			printString("Total: ");
+			printLine(streamTotal.str());
+		}
+		else
+		{
+			printLine("Empty basket!");
+		}
 	}
 }
 
