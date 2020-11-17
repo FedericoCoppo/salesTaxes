@@ -21,8 +21,8 @@ public:
 	// product type for basics sales tax category
 	typedef enum
 	{
-		food,
 		book,
+		food,
 		medicine,
 		genericProduct
 
