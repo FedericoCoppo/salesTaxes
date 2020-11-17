@@ -1,0 +1,5 @@
+book SOMETHING
+magazine BOOK
+shoes GENERIC	
+pens  BOH?
+aspirin MEDICINE 

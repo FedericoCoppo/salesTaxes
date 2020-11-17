@@ -1,0 +1,13 @@
+book BOOK
+magazine BOOK
+magazines BOOK
+chocolate FOOD
+chocolates FOOD
+milk FOOD
+pills MEDICINE
+pill MEDICINE
+aspirin MEDICINE
+aspirins MEDICINE 		    
+music GENERIC	
+perfume GENERIC	
+shoes GENERIC	
