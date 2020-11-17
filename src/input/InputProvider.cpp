@@ -67,7 +67,7 @@ bool InputProvider::getNoteCategory(string note, ShoppingNote::productCategory *
 	bool success = false;
 	bool found = false;
 
-	// default vaule for unknow categories
+	// default vaule for unknown categories
 	*cat = ShoppingNote::productCategory::genericProduct;
 
 	// Avoid creating notes without the vocabulary
@@ -106,7 +106,7 @@ bool InputProvider::getNoteCategory(string note, ShoppingNote::productCategory *
 			}
 			else
 			{
-				*cat = ShoppingNote::productCategory::genericProduct; 	// "GENERIC" or unknow
+				*cat = ShoppingNote::productCategory::genericProduct; 	// "GENERIC" or unknown
 			}
 		}
 

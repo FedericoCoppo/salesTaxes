@@ -22,7 +22,7 @@ int main()
 
 #endif
 
-	cout << "Main End..";
+	cout << "\nprogram terminated..";
 	return 0;
 }
 
