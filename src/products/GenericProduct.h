@@ -10,6 +10,7 @@
 
 // include
 #include <string>
+#include "Tax.h"
 
 using namespace std;
 
@@ -20,16 +21,16 @@ public:
 	GenericProduct(string prodName, int prodQuantity, float prodPrice);
 	virtual ~GenericProduct(void);
 	float CalculateTaxes();
-	float RoundUpTo05(float num);
 
 	// Getter
 	string GetName() { return name;}
-	bool GetIsImported() {return isImported;}
-	float GetPrice() { return price; }
-	float GetTaxes() { return taxes; }
-	float GetIsBasicSalesTaxed() { return isBasicSalesTaxed; }
-	float GetTaxedPrice() { return taxedPrice; }
 	int GetQuantity() { return quantity; }
+	float GetPrice() { return priceRaw; }
+	float GetPriceTaxed() { return priceTaxed; }
+	float GetTaxesValue() { return productTax.GetTax(); }
+	bool GetIsImported() {return isImported;}
+	float GetIsBasicSalesTaxed() { return isBasicSalesTaxed; }
+	Tax * GetTax() { return &productTax; }
 
 protected:
 	bool isBasicSalesTaxed = false;
@@ -37,12 +38,10 @@ protected:
 private:
 	string name;
 	int quantity;
-	float price;
-	float taxedPrice;
-	float taxes;
-	float taxesPct;
+	float priceRaw;
+	float priceTaxed;
+	Tax productTax;
 	bool isImported;
-	bool taxesAlreadyCalculated;
 };
 
 #endif /* GENERICPRODUCT_H_ */

@@ -185,7 +185,7 @@ void ApplicationTest::testCalculatedTaxesValues()
 		testTax *= p->GetQuantity();
 
 		// compare test calculated with the specific product tax field calculated
-		assert( ( int (p->GetTaxes()*100) == int (testTax*100) ));
+		assert( ( int (p->GetTaxesValue()*100) == int (testTax*100) ));
 	}
 }
 
@@ -237,14 +237,14 @@ void ApplicationTest::testProduct(void)
 	assert ( p_testProd->GetPrice( ) == initPrice);
 
 	// test 1 round utility
-	float roundValue = p_testProd->RoundUpTo05(0.16);
+	float roundValue = p_testProd->GetTax()->RoundUpTo05(0.16);
 	stringstream roundValues1_ss;
 	roundValues1_ss << roundValue;
 	const char * t1 = roundValues1_ss.str().c_str();
 	assert ( strcmp(t1, "0.2") == 0);
 
 	// test 2 round utility
-	roundValue = p_testProd->RoundUpTo05(0.12);
+	roundValue = p_testProd->GetTax()->RoundUpTo05(0.12);
 	stringstream roundValues2_ss;
 	roundValues2_ss << roundValue;
 	const char * t2 = roundValues2_ss.str().c_str();

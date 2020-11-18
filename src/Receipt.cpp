@@ -35,8 +35,8 @@ void Receipt::CalculateReceipt(void)
 	{
 		for (int i = 0; i < p_basket->GetBasketSize(); i++)
 		{
-			totalSalesTaxes += p_basket->GetProduct(i)->GetTaxes();
-			total += p_basket->GetProduct(i)->GetTaxedPrice();
+			totalSalesTaxes += p_basket->GetProduct(i)->GetTaxesValue();
+			total += p_basket->GetProduct(i)->GetPriceTaxed();
 		}
 	}
 }
@@ -66,7 +66,7 @@ void Receipt::PrintReceipt ()
 
 			// product price
 			std::stringstream streamTaxedPrice;
-			streamTaxedPrice << std::fixed << std::setprecision(2) << p_basket->GetProduct(i)->GetTaxedPrice();
+			streamTaxedPrice << std::fixed << std::setprecision(2) << p_basket->GetProduct(i)->GetPriceTaxed();
 			printLine(streamTaxedPrice.str());
 		}
 

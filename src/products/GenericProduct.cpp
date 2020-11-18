@@ -9,7 +9,6 @@
 // include
 #include <sstream>
 #include <iostream>
-#include <Math.h>
 
 #include "GenericProduct.h"
 
@@ -18,19 +17,16 @@ GenericProduct::GenericProduct(string prodName, int prodQuantity, float prodPric
 {
 	name = prodName;
 	quantity = prodQuantity;
-	price = prodPrice;
-	taxedPrice = price;
-	taxes = 0.0;
-	taxesPct = 0.0;
+	priceRaw = prodPrice;
+	priceTaxed = priceRaw;
+
 	isImported = false;
 	isBasicSalesTaxed = true;
-	taxesAlreadyCalculated = false;
 
 	// mark as additional input duty
 	if (GetName().find("imported") != std::string::npos)
 	{
 		isImported = true;
-		taxesPct += 0.05;
 	}
 }
 
@@ -43,37 +39,10 @@ GenericProduct::~GenericProduct(void)
 // sales tax calculation routine
 float GenericProduct::CalculateTaxes()
 {
-	if (!taxesAlreadyCalculated)
-	{
-		taxesAlreadyCalculated = true;
+	productTax.CalculateTaxes(this);
+	priceTaxed = priceRaw*quantity + productTax.GetTax();
 
-		float rawTaxes;
-		float roundedTaxes;
-
-		// basic sales taxes
-		if (isBasicSalesTaxed)
-		{
-			taxesPct += 0.1;
-		}
-
-		// consider the number of items
-		for (int i = 0; i < quantity; i++ )
-		{
-			rawTaxes = taxesPct*price;
-			roundedTaxes = RoundUpTo05(rawTaxes);
-			taxes += roundedTaxes;
-		}
-
-		taxedPrice = price*quantity + taxes;
-	}
-
-	return taxes;
-}
-
-// Utility to round up to 0.05 a decimal float value
-float GenericProduct::RoundUpTo05(float num)
-{
-	return ceil(num*20)/20;
+	return productTax.GetTax();
 }
 
 
