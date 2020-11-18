@@ -34,7 +34,6 @@ private:
 
 	Application * app_pt;
 	Basket * p_basket;
-	Receipt * p_receipt;
 	ShoppingSheetList * p_shopSheetList;
 	InputProvider * p_input;
 
