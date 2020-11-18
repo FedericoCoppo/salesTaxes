@@ -8,7 +8,7 @@
 #ifndef MEDICINE_H_
 #define MEDICINE_H_
 
-// include
+// Include
 #include "GenericProduct.h"
 
 // Class that implements the Medicine product

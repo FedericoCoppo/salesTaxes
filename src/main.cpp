@@ -5,6 +5,7 @@
 	Description : Main routine
  *******************************************************************************/
 
+// Include
 #include "main.h"
 
 int main()
@@ -17,12 +18,12 @@ int main()
 	delete testApp_pt;
 
 #else
-	// release application
+	// Release application
 
 
 #endif
 
-	cout << "\nprogram terminated..";
+	cout << "\nProgram terminated..";
 	return 0;
 }
 

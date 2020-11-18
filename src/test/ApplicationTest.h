@@ -8,7 +8,7 @@
 #ifndef TEST_APPLICATIONTEST_H_
 #define TEST_APPLICATIONTEST_H_
 
-// include
+// Include
 #include "Application.h"
 #include "ShoppingNote.h"
 #include "ShoppingSheetList.h"

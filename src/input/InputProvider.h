@@ -8,11 +8,9 @@
 #ifndef INPUTPROVIDER_H_
 #define INPUTPROVIDER_H_
 
-// include
-#include "ShoppingSheetList.h"
+// Include
 #include <map>
-
-using namespace std;
+#include "ShoppingSheetList.h"
 
 // Class to manage input
 class InputProvider
@@ -24,6 +22,7 @@ public:
 	{
 		hardCoded,
 		file,
+
 	} InputSource;
 
 	InputProvider();
@@ -47,7 +46,7 @@ private:
 	ShoppingSheetList * p_shopSheetList;
 	map <string,string> MapProductCategory;
 
-	// configuration static parameter
+	// Configuration static parameter
 	static const unsigned char UserTestID;
 	static const bool WrongHardCodedInput;
 };

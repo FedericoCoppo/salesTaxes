@@ -8,7 +8,7 @@
 #ifndef BOOK_H_
 #define BOOK_H_
 
-// include
+// Include
 #include "GenericProduct.h"
 
 // Class that implements the Book product

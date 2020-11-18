@@ -8,17 +8,17 @@
 #ifndef SHOPPINGNOTE_H_
 #define SHOPPINGNOTE_H_
 
-// include
-#include <string>
-
 using namespace std;
+
+// Include
+#include <string>
 
 // Class that implement product description annotation
 class ShoppingNote
 {
 public:
 
-	// product type for basics sales tax category
+	// Product type for basics sales tax category
 	typedef enum
 	{
 		book,
@@ -37,10 +37,10 @@ public:
 
 private:
 
-	// product info input string
+	// Product info input string
 	string note;
 
-	// product category
+	// Product category
 	productCategory category;
 };
 

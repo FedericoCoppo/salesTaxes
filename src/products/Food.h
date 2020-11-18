@@ -8,7 +8,7 @@
 #ifndef FOOD_H_
 #define FOOD_H_
 
-// include
+// Include
 #include "GenericProduct.h"
 
 // Class that implements the Food product

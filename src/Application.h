@@ -10,10 +10,9 @@
 #ifndef APPLICATION_H_
 #define APPLICATION_H_
 
-// include
+// Include
 #include <iostream>
 #include <string>
-
 #include "GenericProduct.h"
 #include "Food.h"
 #include "Book.h"
@@ -22,8 +21,6 @@
 #include "Receipt.h"
 #include "ShoppingSheetList.h"
 #include "InputProvider.h"
-
-using namespace std;
 
 // Class that implement the Application
 class Application
@@ -57,7 +54,7 @@ private:
 	// Wrong input notes counter
 	int discardedNotesCnt;
 
-	// link to the input
+	// Link to the input
 	InputProvider * p_input;
 
 	// Provider Shopping list

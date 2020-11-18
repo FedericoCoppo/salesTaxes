@@ -6,6 +6,7 @@
 				  metaphorically it represents the shopping paper list
 *******************************************************************************/
 
+// Include
 #include "ShoppingSheetList.h"
 
 // Constructor

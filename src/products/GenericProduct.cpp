@@ -6,10 +6,9 @@
 				  it represent the store product with all purchase information
 *******************************************************************************/
 
-// include
+// Include
 #include <sstream>
 #include <iostream>
-
 #include "GenericProduct.h"
 
 // Constructor

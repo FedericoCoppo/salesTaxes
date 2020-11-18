@@ -6,6 +6,7 @@
 				  metaphorically a shopping note is an item of a shopping list
 *******************************************************************************/
 
+// Include
 #include "ShoppingNote.h"
 
 // Constructor

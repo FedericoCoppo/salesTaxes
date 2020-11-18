@@ -6,7 +6,7 @@
 				  food specific product class
 *******************************************************************************/
 
-// include
+// Include
 #include "Food.h"
 
 // Constructor

@@ -8,6 +8,7 @@
 #ifndef RECEIPTGENERATOR_H_
 #define RECEIPTGENERATOR_H_
 
+// Include
 #include "Basket.h"
 
 // Class that implement a Receipt
@@ -27,13 +28,13 @@ private:
 	void printLine(string s);
 	void printString(string s);
 
-	// reference basket of this receipt
+	// Reference basket of this receipt
 	Basket * p_basket;
 
 	// Sum of taxes
 	float totalSalesTaxes;
 
-	// final price
+	// Final price
 	float total;
 };
 

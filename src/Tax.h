@@ -27,7 +27,7 @@ private:
 	float taxPct;
 	bool isTaxesCalculated;
 
-	// static attribute
+	// Static attribute
 	static const float importedTaxPercentage;
 	static const float basedSalesTaxPercentage;
 };

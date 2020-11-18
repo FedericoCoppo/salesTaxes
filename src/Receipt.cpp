@@ -6,12 +6,11 @@
 				  it calculate and print the receipt
 *******************************************************************************/
 
-// include
+// Include
 #include <iostream>
 #include <string>
 #include <sstream>
 #include <iomanip>
-
 #include "Receipt.h"
 
 // Constructor
@@ -46,25 +45,23 @@ void Receipt::PrintReceipt ()
 {
 	if (p_basket)
 	{
-
+		int maxSize = p_basket->GetBasketSize();
 		std::stringstream streamTotalTaxes;
 		streamTotalTaxes << std::fixed << std::setprecision(2) << totalSalesTaxes;
 		std::stringstream streamTotal;
 		streamTotal << std::fixed << std::setprecision(2) << total;
 
-		int maxSize = p_basket->GetBasketSize();
-
 		for (int i = 0; i < maxSize; i++)
 		{
-			// product number
+			// Product number
 			std::stringstream streamNumberOfProduct;
 			streamNumberOfProduct << std::fixed << std::setprecision(2) << p_basket->GetProduct(i)->GetQuantity();
 			printString(streamNumberOfProduct.str() + " ");
 
-			// product name
+			// Product name
 			printString(p_basket->GetProduct(i)->GetName() + ": ");
 
-			// product price
+			// Product price
 			std::stringstream streamTaxedPrice;
 			streamTaxedPrice << std::fixed << std::setprecision(2) << p_basket->GetProduct(i)->GetPriceTaxed();
 			printLine(streamTaxedPrice.str());
@@ -72,11 +69,9 @@ void Receipt::PrintReceipt ()
 
 		if (maxSize > 0)
 		{
-			// shopping totale sales taxes
 			printString("Sales Taxes: ");
 			printLine(streamTotalTaxes.str());
 
-			// shopping total price
 			printString("Total: ");
 			printLine(streamTotal.str());
 		}

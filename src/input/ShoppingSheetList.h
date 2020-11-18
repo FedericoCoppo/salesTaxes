@@ -8,13 +8,10 @@
 #ifndef SHOPPINGSHEETLIST_H_
 #define SHOPPINGSHEETLIST_H_
 
-// include
+// Include
 #include <string>
 #include <list>
-
 #include "ShoppingNote.h"
-
-using namespace std;
 
 // Class to manage list of Notes
 class ShoppingSheetList

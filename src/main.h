@@ -8,10 +8,9 @@
 #ifndef MAIN_H_
 #define MAIN_H_
 
-// include
+// Include
 #include <ApplicationTest.h>
 #include <iostream>
-
 #include "Application.h"
 
 // Running configuration

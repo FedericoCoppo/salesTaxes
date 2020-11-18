@@ -6,17 +6,14 @@
 				  it provide input to application
 *******************************************************************************/
 
-// include
+// Include
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <algorithm>
 #include <sstream>
 #include <regex>
-
 #include "InputProvider.h"
-
-using namespace std;
 
 // static attribute
 const unsigned char InputProvider::UserTestID = 1;
@@ -67,7 +64,7 @@ bool InputProvider::getNoteCategory(string note, ShoppingNote::productCategory *
 	bool success = false;
 	bool found = false;
 
-	// default vaule for unknown categories
+	// Default value for unknown categories
 	*cat = ShoppingNote::productCategory::genericProduct;
 
 	// Avoid creating notes without the vocabulary
@@ -77,7 +74,7 @@ bool InputProvider::getNoteCategory(string note, ShoppingNote::productCategory *
 		string categoryStr;
 		std::stringstream test(note);
 
-		// for each chunk check if present in the vocabulary
+		// For each chunk check if present in the vocabulary
 		while(std::getline(test, chunk, ' '))
 		{
 		    if (MapProductCategory.find(chunk) != MapProductCategory.end())
@@ -91,7 +88,7 @@ bool InputProvider::getNoteCategory(string note, ShoppingNote::productCategory *
 
 		if (found)
 		{
-			// convert string value into category enum
+			// Convert string value into category enum
 			if (categoryStr == "BOOK")
 			{
 				*cat = ShoppingNote::productCategory::book;
@@ -165,16 +162,15 @@ bool InputProvider::fileCatVocabularyReader (const char * path)
 
 		while(getline(vocabularyFile, line))
 		{
-			// replace \t with space to consider also file with wrong format
+			// Replace \t with space to consider also file with wrong format
 			line = std::regex_replace(line, std::regex("\\t"), " ");
 
 			prodName = line.substr(0, line.find(" "));
 			prodCategory = line.erase(0, prodName.length() + 1);
 
-			// remove spurious space
+			// Remove spurious space
 			prodName = std::regex_replace(prodName, std::regex(" "), "");
 			prodCategory = std::regex_replace(prodCategory, std::regex(" "), "");
-
 			prodCategory = convertStringToUpper(prodCategory);
 
 			// Remove spaces
@@ -268,7 +264,6 @@ void InputProvider::hardCodedInputCreate()
 	}
 	else if (UserTestID == 3)
 	{
-
 		p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("1 imported bottle of perfume at 27.99", ShoppingNote::productCategory::genericProduct));
 		p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("1 bottle of perfume at 18.99", ShoppingNote::productCategory::genericProduct));
 		p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("1 packet of headache pills at 9.75", ShoppingNote::productCategory::medicine));
@@ -276,7 +271,6 @@ void InputProvider::hardCodedInputCreate()
 	}
 	else if (UserTestID == 4)
 	{
-
 		p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("1 imported box of chocolates at 10.50", ShoppingNote::productCategory::genericProduct));
 		p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("1 imported bottle of perfume at 54.65", ShoppingNote::productCategory::genericProduct));
 		p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("2 book at 12.495", ShoppingNote::productCategory::medicine));
@@ -287,14 +281,13 @@ void InputProvider::hardCodedInputCreate()
 // Hard coded input wrong data creation
 void InputProvider::hardCodedWrongInputCreate()
 {
-	// good input
+	// Good input
 	p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("1 imported book at 12.49", ShoppingNote::productCategory::book));
 	p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("2 chocolate bar at 1.25", ShoppingNote::productCategory::food));
 	p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("1 cake at 2", ShoppingNote::productCategory::food));
 	p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("1 milk at 1.", ShoppingNote::productCategory::food));
 	p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("1 coke at .2", ShoppingNote::productCategory::food));
-
-	// bad input
+	// Bad input
 	p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("2x coffè at 1.25", ShoppingNote::productCategory::food));
 	p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("x2 chocolate bar at 1.25", ShoppingNote::productCategory::food));
 	p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("1 music CD at XX", ShoppingNote::productCategory::genericProduct));

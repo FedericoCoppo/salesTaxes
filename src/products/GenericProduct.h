@@ -8,11 +8,11 @@
 #ifndef GENERICPRODUCT_H_
 #define GENERICPRODUCT_H_
 
-// include
+using namespace std;
+
+// Include
 #include <string>
 #include "Tax.h"
-
-using namespace std;
 
 // Class that implement a Store Product
 class GenericProduct

@@ -9,11 +9,8 @@
 #ifndef BASKET_H_
 #define BASKET_H_
 
-using namespace std;
-
-// include
+// Include
 #include <list>
-
 #include "GenericProduct.h"
 
 // Class that implement a basket

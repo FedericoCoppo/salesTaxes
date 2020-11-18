@@ -6,15 +6,14 @@
 				  it create and test Application
 *******************************************************************************/
 
-// include
+// Include
 #include <assert.h>
 #include <math.h>
 #include <sstream>
 #include <string.h>
-
 #include "applicationTest.h"
 
-// static attribute
+// Static attribute
 const unsigned char ApplicationTest::inputSourceMax = 10;
 
 // Constructor
@@ -33,7 +32,7 @@ ApplicationTest::~ApplicationTest(void)
 	clearApplicationTest();
 }
 
-// Clear the application pointers
+// Clear memory
 void ApplicationTest::clearApplicationTest()
 {
 	// clear the heap
@@ -155,7 +154,7 @@ void ApplicationTest::testCalculatedTaxesValues()
 		// Check taxes calculation value
 		assert(p->GetPrice() > 0.0);
 
-		// test taxes
+		// Test taxes
 		float taxPercentage_x100 = 0.0;
 
 		if (!p->GetIsBasicSalesTaxed() && !p->GetIsImported())
@@ -175,16 +174,16 @@ void ApplicationTest::testCalculatedTaxesValues()
 			taxPercentage_x100 = 0.05;
 		}
 
-		// calculate the tax
+		// Calculate the tax
 		float testTax = p->GetPrice()*taxPercentage_x100;
 
-		// round up to the nearest 0.05
+		// Round up to the nearest 0.05
 		testTax = ceil(testTax*20)*0.05;
 
-		// consider the number of that product
+		// Consider the number of that product
 		testTax *= p->GetQuantity();
 
-		// compare test calculated with the specific product tax field calculated
+		// Compare test calculated with the specific product tax field calculated
 		assert( ( int (p->GetTaxesValue()*100) == int (testTax*100) ));
 	}
 }
@@ -206,55 +205,54 @@ void ApplicationTest::testReceipt()
 	// Receipt test
 	p_receipt->CalculateReceipt();
 
-	// test receipt amount
+	// Test receipt amount
 	assert(p_receipt->GetTotal() >= 0);
 
-	// negative taxes are not allowed
+	// Negative taxes are not allowed
 	assert(p_receipt->GetTotalSalesTaxes() >= 0);
 
-	// consistently test: the receipt total minus the taxes should be equal the sum of products's prices
+	// Consistently test: the receipt total minus the taxes should be equal the sum of products's prices
 	assert( (int) (totalPrice + p_receipt->GetTotalSalesTaxes())*100 ==  (int) p_receipt->GetTotal()*100);
 
-	// print the output
+	// Print the output
 	p_receipt->PrintReceipt();
 }
 
-// Test Product class
+// Unit test on product class
 void ApplicationTest::testProduct(void)
 {
-	// unit test on product
 	GenericProduct * p_testProd = NULL;
 	GenericProduct * p_testFood = NULL;
 
-	// create a product
+	// Create a product
 	float initPrice = 5.57;
 	float prodNum = 4;
 	p_testProd = new GenericProduct("testProduct imported", prodNum, initPrice);
 	p_testFood = new Food("testProduct", prodNum, initPrice);
 
-	// check the attribute
+	// Check the attribute
 	assert ( p_testProd->GetQuantity() == prodNum);
 	assert ( p_testProd->GetPrice( ) == initPrice);
 
-	// test 1 round utility
+	// Test 1 round utility
 	float roundValue = p_testProd->GetTax()->RoundUpTo05(0.16);
 	stringstream roundValues1_ss;
 	roundValues1_ss << roundValue;
 	const char * t1 = roundValues1_ss.str().c_str();
 	assert ( strcmp(t1, "0.2") == 0);
 
-	// test 2 round utility
+	// Test 2 round utility
 	roundValue = p_testProd->GetTax()->RoundUpTo05(0.12);
 	stringstream roundValues2_ss;
 	roundValues2_ss << roundValue;
 	const char * t2 = roundValues2_ss.str().c_str();
 	assert ( strcmp(t2, "0.15") == 0);
 
-	// test the correct taxes category
+	// Test the correct taxes category
 	assert(p_testProd->GetIsBasicSalesTaxed() == true);
 	assert(p_testFood->GetIsBasicSalesTaxed() == false);
 
-	// test for imported category
+	// Test for imported category
 	assert(p_testProd->GetIsImported() == true);
 	assert(p_testFood->GetIsImported() == false);
 
@@ -277,7 +275,7 @@ void ApplicationTest::testShoppingSheetList()
 	// Free memory
 	p_shopSheetList->ClearNoteFromShoppingList();
 
-	// check the list is empty
+	// Check the list is empty
 	assert(p_shopSheetList->GetShoppingNoteListSize() == 0);
 
 	delete p_shopSheetList;
@@ -311,7 +309,7 @@ void ApplicationTest::Test(void)
 
 	for ( int i = 0; i < ApplicationTest::inputSourceMax; i++)
 	{
-		// configureTest
+		// ConfigureTest
 		configureTest(i + 1);
 
 		// Functional Test
@@ -319,7 +317,7 @@ void ApplicationTest::Test(void)
 		testCalculatedTaxesValues();
 		testReceipt();
 
-		// clear memory
+		// Clear memory
 		clearApplicationTest();
 	}
 }

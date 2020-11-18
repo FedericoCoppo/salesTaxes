@@ -6,13 +6,12 @@
 				  it represent the product tax
 *******************************************************************************/
 
-// include
+// Include
 #include <Math.h>
-
 #include "Tax.h"
 #include "GenericProduct.h"
 
-// static attribute
+// Static attribute
 const float Tax::importedTaxPercentage = 0.05;
 const float  Tax::basedSalesTaxPercentage = 0.10;
 

@@ -6,7 +6,7 @@
 				  Medicine specific product class
  *******************************************************************************/
 
-// include
+// Include
 #include "Medicine.h"
 
 // Constructor

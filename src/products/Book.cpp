@@ -6,6 +6,7 @@
 				  book specific product class
  *******************************************************************************/
 
+// Include
 #include "Book.h"
 
 // Constructor

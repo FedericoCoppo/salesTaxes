@@ -7,10 +7,9 @@
 				  products and fill the basket
 *******************************************************************************/
 
-// include
+// Include
 #include <sstream>
 #include <string.h>
-
 #include "Application.h"
 
 // Static attribute
@@ -72,22 +71,22 @@ void Application::FillBasketFromShoppingList(ShoppingSheetList *p_shopList, Bask
 		ShopListSize = p_shopList->GetShoppingNoteListSize();
 	}
 
-	// for each  notes
+	// For each  notes
 	for (int i = 0; i < ShopListSize; i++)
 	{
 		p_shopNoteTmp = p_shopList->GetShoppingNote(i);
 
 		if (p_shopNoteTmp && p_basket)
 		{
-			// validate the note before creating a new product
+			// Validate the note before creating a new product
 			string prodName;
 			int prodNum = 0;
 			float prodPrice = 0.0;
 
-			// validate the note, then add the product to basket
+			// Validate the note, then add the product to basket
 			if (validateShoppingNote(p_shopNoteTmp->GetShoppingNoteString(), &prodNum, &prodName, &prodPrice))
 			{
-				// convert the note into product
+				// Vonvert the note into product
 				switch (p_shopNoteTmp->GetShoppingNoteCategory())
 				{
 				case ShoppingNote::productCategory::book:
@@ -133,7 +132,7 @@ void Application::ClearBasket()
 		}
 	}
 
-	// clear the list
+	// Clear the list
 	p_basket->ClearProductFromBasket();
 }
 
@@ -153,14 +152,14 @@ bool Application::validateShoppingNote(string s, int * p_number, string * p_name
 		*p_number = num;
 	}
 
-	// avoid too big or negative input value
+	// Avoid too big or negative input value
 	if ( (num >= Application::ProductNumberMax) || (num <= 0) )
 	{
 		res = false;
 	}
 	else
 	{
-		// check the name
+		// Check the name
 		s = s.erase(0, numStr.length() + 1);
 		string nameStr = s.substr(0, s.find(" at "));
 
@@ -173,12 +172,12 @@ bool Application::validateShoppingNote(string s, int * p_number, string * p_name
 		{
 			*p_name = nameStr;
 
-			// get the product price
+			// Get the product price
 			string priceStr = s.erase(0, nameStr.length() + 4);
 
 			if (isValidPrice(priceStr))
 			{
-				// avoid wrong format price input
+				// Avoid wrong format price input
 				try
 				{
 					*p_price = std::stof(priceStr);
@@ -189,7 +188,7 @@ bool Application::validateShoppingNote(string s, int * p_number, string * p_name
 					res = false;
 				}
 
-				// avoid considering product with price equal zero
+				// Avoid considering product with price equal zero
 				if ( (res == true) && (*p_price == 0))
 				{
 					res = false;
