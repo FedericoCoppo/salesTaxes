@@ -116,23 +116,23 @@ DEBUGGER: gdb
 ```
 SET UP THE IDE
 ```
--> Download last Eclipse version for C++
--> Clone this project from main branch
--> Open Eclipse workspace,  -> "Import Project" -> "General" -> "Existing Project into Workspace" and select the project folder
+->Download last Eclipse version for C++
+->Clone this project from main branch
+->Open Eclipse workspace->"Import Project"->"General"->"Existing Project into Workspace", select the folder
 ```
 BUILD
 ```
-->"Properties" -> "C/C++ Build" -> "Tool Chain Editor" and verify the MinGW GCC toolchain  is correctly detected 
+->"Properties"->"C/C++ Build"->"Tool Chain Editor" and verify the MinGW GCC toolchain is correctly detected 
 -> Build project
 ```
 RUN
 ```
--> "New Launch Configuration" -> "Run" -> "C/C++ Application" -> "Finish"
--> Run
+->"New Launch Configuration"->"Run"->"C/C++ Application"->"Finish"
+->Run
 ```
 DEBUG
 ```
--> "Debug Configuration" -> "Debug"
+->"Debug Configuration"->"Debug"
 In case you can't see console output during debug:
--> "Debug configuration" -> "Debugger" and check "Use esternal console for inferior".
+->"Debug configuration"->"Debugger" and check "Use esternal console for inferior".
 ```
