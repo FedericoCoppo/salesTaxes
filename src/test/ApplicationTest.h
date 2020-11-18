@@ -32,7 +32,7 @@ private:
 	void configureTest(int testCnt);
 	void clearApplicationTest();
 
-	Application * app_pt;
+	Application * p_app;
 	Basket * p_basket;
 	ShoppingSheetList * p_shopSheetList;
 	InputProvider * p_input;

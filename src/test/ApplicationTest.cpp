@@ -19,7 +19,7 @@ const unsigned char ApplicationTest::inputSourceMax = 10;
 // Constructor
 ApplicationTest::ApplicationTest(void)
 {
-	app_pt = NULL;
+	p_app = NULL;
 	p_basket = NULL;
 	p_input = NULL;
 	p_shopSheetList = NULL;
@@ -35,10 +35,10 @@ ApplicationTest::~ApplicationTest(void)
 void ApplicationTest::clearApplicationTest()
 {
 	// clear the heap
-	if (app_pt != NULL)
+	if (p_app != NULL)
 	{
-		delete app_pt;
-		app_pt = NULL;
+		delete p_app;
+		p_app = NULL;
 	}
 
 	p_basket = NULL;
@@ -54,77 +54,77 @@ void ApplicationTest::testDifferentInputSource(int testCnt)
 	if (testCnt == 1)
 	{
 		// Good file input 1
-		app_pt = new Application(InputProvider::InputSource::file, "src/input/inputNotes1.txt", "src/input/categoryVocabulary.txt");
-		assert (app_pt->GetInputProvider()->GetMapProductCategorySize() == 13);
-		assert (app_pt->GetInputShoppingSheetList()->GetShoppingNoteListSize() == 3);
+		p_app = new Application(InputProvider::InputSource::file, "src/input/inputNotes1.txt", "src/input/categoryVocabulary.txt");
+		assert (p_app->GetInputProvider()->GetMapProductCategorySize() == 13);
+		assert (p_app->GetInputShoppingSheetList()->GetShoppingNoteListSize() == 3);
 	}
 	else if (testCnt == 2)
 	{
 		// Good file input 2
-		app_pt = new Application(InputProvider::InputSource::file, "src/input/inputNotes2.txt", "src/input/categoryVocabulary.txt");
-		assert (app_pt->GetInputProvider()->GetMapProductCategorySize() == 13);
-		assert (app_pt->GetInputShoppingSheetList()->GetShoppingNoteListSize() == 2);
+		p_app = new Application(InputProvider::InputSource::file, "src/input/inputNotes2.txt", "src/input/categoryVocabulary.txt");
+		assert (p_app->GetInputProvider()->GetMapProductCategorySize() == 13);
+		assert (p_app->GetInputShoppingSheetList()->GetShoppingNoteListSize() == 2);
 	}
 	else if (testCnt == 3)
 	{
 		// Good file input 3
-		app_pt = new Application(InputProvider::InputSource::file, "src/input/inputNotes3.txt", "src/input/categoryVocabulary.txt");
-		assert (app_pt->GetInputProvider()->GetMapProductCategorySize() == 13);
-		assert (app_pt->GetInputShoppingSheetList()->GetShoppingNoteListSize() == 4);
+		p_app = new Application(InputProvider::InputSource::file, "src/input/inputNotes3.txt", "src/input/categoryVocabulary.txt");
+		assert (p_app->GetInputProvider()->GetMapProductCategorySize() == 13);
+		assert (p_app->GetInputShoppingSheetList()->GetShoppingNoteListSize() == 4);
 	}
 	else if (testCnt == 4)
 	{
 		// Good file input 4
-		app_pt = new Application(InputProvider::InputSource::file, "src/input/inputNotes4.txt", "src/input/categoryVocabulary.txt");
-		assert (app_pt->GetInputProvider()->GetMapProductCategorySize() == 13);
-		assert (app_pt->GetInputShoppingSheetList()->GetShoppingNoteListSize() == 4);
+		p_app = new Application(InputProvider::InputSource::file, "src/input/inputNotes4.txt", "src/input/categoryVocabulary.txt");
+		assert (p_app->GetInputProvider()->GetMapProductCategorySize() == 13);
+		assert (p_app->GetInputShoppingSheetList()->GetShoppingNoteListSize() == 4);
 	}
 	else if (testCnt == 5)
 	{
 		// Hard coded input
-		app_pt = new Application();
+		p_app = new Application();
 	}
 	else if (testCnt == 6)
 	{
 		// No file path provided
-		app_pt = new Application(InputProvider::InputSource::file);
-		assert (app_pt->GetInputProvider()->GetMapProductCategorySize() == 0);
-		assert (app_pt->GetInputShoppingSheetList()->GetShoppingNoteListSize() == 0);
+		p_app = new Application(InputProvider::InputSource::file);
+		assert (p_app->GetInputProvider()->GetMapProductCategorySize() == 0);
+		assert (p_app->GetInputShoppingSheetList()->GetShoppingNoteListSize() == 0);
 	}
 	else if (testCnt == 7)
 	{
 		// No Configuration Vocabulary path provided
-		app_pt = new Application(InputProvider::InputSource::file, "src/input/inputNotes1.txt");
-		assert (app_pt->GetInputProvider()->GetMapProductCategorySize() == 0);
-		assert (app_pt->GetInputShoppingSheetList()->GetShoppingNoteListSize() == 0);
+		p_app = new Application(InputProvider::InputSource::file, "src/input/inputNotes1.txt");
+		assert (p_app->GetInputProvider()->GetMapProductCategorySize() == 0);
+		assert (p_app->GetInputShoppingSheetList()->GetShoppingNoteListSize() == 0);
 	}
 	else if (testCnt == 8)
 	{
 		// Wrong path for both files
-		app_pt = new Application(InputProvider::InputSource::file, "src/input/inputNotesX.txt", "src/input/categoryVocabularyX.txt");
-		assert (app_pt->GetInputProvider()->GetMapProductCategorySize() == 0);
-		assert (app_pt->GetInputShoppingSheetList()->GetShoppingNoteListSize() == 0);
+		p_app = new Application(InputProvider::InputSource::file, "src/input/inputNotesX.txt", "src/input/categoryVocabularyX.txt");
+		assert (p_app->GetInputProvider()->GetMapProductCategorySize() == 0);
+		assert (p_app->GetInputShoppingSheetList()->GetShoppingNoteListSize() == 0);
 	}
 	else if (testCnt == 9)
 	{
 		// Wrong input notes file only
-		app_pt = new Application(InputProvider::InputSource::file, "src/input/inputNotesX.txt", "src/input/categoryVocabulary.txt");
-		assert (app_pt->GetInputProvider()->GetMapProductCategorySize() == 13);
-		assert (app_pt->GetInputShoppingSheetList()->GetShoppingNoteListSize() == 0);
+		p_app = new Application(InputProvider::InputSource::file, "src/input/inputNotesX.txt", "src/input/categoryVocabulary.txt");
+		assert (p_app->GetInputProvider()->GetMapProductCategorySize() == 13);
+		assert (p_app->GetInputShoppingSheetList()->GetShoppingNoteListSize() == 0);
 	}
 	else if (testCnt == 10)
 	{
 		// Vocabulary with unknown categories
-		app_pt = new Application(InputProvider::InputSource::file, "src/input/inputNotes1.txt", "src/input/categoryVocabulary2.txt");
-		assert (app_pt->GetInputProvider()->GetMapProductCategorySize() == 3);
-		assert (app_pt->GetInputShoppingSheetList()->GetShoppingNoteListSize() == 3);
+		p_app = new Application(InputProvider::InputSource::file, "src/input/inputNotes1.txt", "src/input/categoryVocabulary2.txt");
+		assert (p_app->GetInputProvider()->GetMapProductCategorySize() == 3);
+		assert (p_app->GetInputShoppingSheetList()->GetShoppingNoteListSize() == 3);
 	}
 }
 
 // Check that all product object has been correctly added in the basket
 void ApplicationTest::testDataStruct()
 {
-	int productObj = p_shopSheetList->GetShoppingNoteListSize() - app_pt->GetDiscardedNotesCnt();
+	int productObj = p_shopSheetList->GetShoppingNoteListSize() - p_app->GetDiscardedNotesCnt();
 	assert (p_basket->GetBasketSize() == productObj);
 }
 
@@ -201,19 +201,19 @@ void ApplicationTest::testReceipt()
 	}
 
 	// Receipt test
-	app_pt->GetReceipt()->CalculateReceipt();
+	p_app->GetReceipt()->CalculateReceipt();
 
 	// Test receipt amount
-	assert(app_pt->GetReceipt()->GetTotal() >= 0);
+	assert(p_app->GetReceipt()->GetTotal() >= 0);
 
 	// Negative taxes are not allowed
-	assert(app_pt->GetReceipt()->GetTotalSalesTaxes() >= 0);
+	assert(p_app->GetReceipt()->GetTotalSalesTaxes() >= 0);
 
 	// Consistently test: the receipt total minus the taxes should be equal the sum of products's prices
-	assert( (int) (totalPrice + app_pt->GetReceipt()->GetTotalSalesTaxes())*100 ==  (int) app_pt->GetReceipt()->GetTotal()*100);
+	assert( (int) (totalPrice + p_app->GetReceipt()->GetTotalSalesTaxes())*100 ==  (int) p_app->GetReceipt()->GetTotal()*100);
 
 	// Print the output
-	app_pt->GetReceipt()->PrintReceipt();
+	p_app->GetReceipt()->PrintReceipt();
 }
 
 // Unit test on product class
@@ -285,14 +285,14 @@ void ApplicationTest::configureTest(int testCnt)
 	testDifferentInputSource(testCnt);
 
 	// Link with basket and receipt
-	p_basket = app_pt->GetBasket();
+	p_basket = p_app->GetBasket();
 
 	// Create input and link with the application
-	p_input = app_pt->GetInputProvider();
-	p_shopSheetList = app_pt->GetInputShoppingSheetList();
+	p_input = p_app->GetInputProvider();
+	p_shopSheetList = p_app->GetInputShoppingSheetList();
 
 	// Fill basket with data input
-	app_pt->FillBasketFromShoppingList(p_shopSheetList, p_basket);
+	p_app->FillBasketFromShoppingList(p_shopSheetList, p_basket);
 }
 
 // Main test routine for application class
