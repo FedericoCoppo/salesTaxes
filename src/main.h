@@ -9,9 +9,9 @@
 #define MAIN_H_
 
 // Include
-#include <ApplicationTest.h>
 #include <iostream>
 #include "Application.h"
+#include "ApplicationTest.h"
 
 // Running configuration
 #define TEST_APPLICATION
