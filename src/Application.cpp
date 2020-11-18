@@ -77,14 +77,14 @@ void Application::FillBasketFromShoppingList(ShoppingSheetList *p_shopList, Bask
 	{
 		p_shopNoteTmp = p_shopList->GetShoppingNote(i);
 
-		if (p_shopNoteTmp)
+		if (p_shopNoteTmp && p_basket)
 		{
 			// validate the note before creating a new product
 			string prodName;
 			int prodNum = 0;
 			float prodPrice = 0.0;
 
-			// validate the note
+			// validate the note, then add the product to basket
 			if (validateShoppingNote(p_shopNoteTmp->GetShoppingNoteString(), &prodNum, &prodName, &prodPrice))
 			{
 				// convert the note into product
@@ -104,11 +104,7 @@ void Application::FillBasketFromShoppingList(ShoppingSheetList *p_shopList, Bask
 					break;
 				}
 
-				// add the product to basket
-				if (p_basket)
-				{
-					p_basket->AddProductToBasket(p_productTmp);
-				}
+				p_basket->AddProductToBasket(p_productTmp);
 			}
 			else
 			{
