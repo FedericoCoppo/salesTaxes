@@ -21,7 +21,6 @@ ApplicationTest::ApplicationTest(void)
 {
 	app_pt = NULL;
 	p_basket = NULL;
-	p_receipt = NULL;
 	p_input = NULL;
 	p_shopSheetList = NULL;
 }
@@ -43,7 +42,6 @@ void ApplicationTest::clearApplicationTest()
 	}
 
 	p_basket = NULL;
-	p_receipt = NULL;
 	p_input = NULL;
 	p_shopSheetList = NULL;
 }
@@ -203,19 +201,19 @@ void ApplicationTest::testReceipt()
 	}
 
 	// Receipt test
-	p_receipt->CalculateReceipt();
+	app_pt->GetReceipt()->CalculateReceipt();
 
 	// Test receipt amount
-	assert(p_receipt->GetTotal() >= 0);
+	assert(app_pt->GetReceipt()->GetTotal() >= 0);
 
 	// Negative taxes are not allowed
-	assert(p_receipt->GetTotalSalesTaxes() >= 0);
+	assert(app_pt->GetReceipt()->GetTotalSalesTaxes() >= 0);
 
 	// Consistently test: the receipt total minus the taxes should be equal the sum of products's prices
-	assert( (int) (totalPrice + p_receipt->GetTotalSalesTaxes())*100 ==  (int) p_receipt->GetTotal()*100);
+	assert( (int) (totalPrice + app_pt->GetReceipt()->GetTotalSalesTaxes())*100 ==  (int) app_pt->GetReceipt()->GetTotal()*100);
 
 	// Print the output
-	p_receipt->PrintReceipt();
+	app_pt->GetReceipt()->PrintReceipt();
 }
 
 // Unit test on product class
@@ -288,7 +286,6 @@ void ApplicationTest::configureTest(int testCnt)
 
 	// Link with basket and receipt
 	p_basket = app_pt->GetBasket();
-	p_receipt = app_pt->GetReceipt();
 
 	// Create input and link with the application
 	p_input = app_pt->GetInputProvider();
