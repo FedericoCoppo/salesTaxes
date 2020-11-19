@@ -36,8 +36,8 @@ The project started with the test design in the `ApplicationTest` class (TDD), a
 - `GenericProduct`is the class that represents the generic product subject to taxation. Each product contains a `Tax` object that provides tax calculation and rounding.
 - `Book`, `Food` and `Medicine` are subclasses of `GenericProduct` that, for now, do not have particular functionalities with respect to the parent class if not the fact of being exempted from basic sales taxation.
 - `Basket` is the class that collects the list of purchased products: it is a shopping cart.
-- `Receipt` is the class that calculates and prints the final receipt for the products in the cart.
-- `Application` is the class that decides which source to take the inputs from, fills the `Basket` with products from the shopping list and generates the `Receipt`.
+- `Receipt` is the class that calculates and prints the final receipt for the products in the basket.
+- `Application` is the class that decides which source to take the inputs from, fills the `Basket` with products from the `ShoppingSheetList` and generates the `Receipt`.
 - `ApplicationTest` is the class that performs unit tests on other classes, creates an application and performs functional tests on it for different types of input. It performs a looped series of repeated tests for different inputs (hard coded, correct input files, wrong input files, wrong category vocabulary files, etc.) without recompiling.
 -The *input* folder contains input files and classes to manage that input.
 -The *products* folder contains classes to manage the products.
@@ -55,10 +55,12 @@ If the input is from file the hypothesis is to have:
 
 Incorrectly formatted products and categories are discarded.
 
+Products that are not found in the categories map are considered *genericProduct*.
+
 In the input folder there are some examples for these input files used in the tests. 
 
 ## Output format
-Console printing was used for the output, in case of failure atest an assert is displayed
+Console printing was used for the output, in case of test failure an assert is displayed
 
 ```
 Assertion failed: ( int (p->GetTaxesValue()*100) == int (testTax*100) ), file ..\src\test\ApplicationTest.cpp, line 187
@@ -122,7 +124,7 @@ SET UP THE IDE
 ```
 BUILD
 ```
-->"Properties"->"C/C++ Build"->"Tool Chain Editor" and verify the MinGW GCC toolchain is correctly detected 
+->"Properties"->"C/C++ Build"->"Tool Chain Editor" and verify the MinGW GCC toolchain is detected 
 -> Build project
 ```
 RUN
