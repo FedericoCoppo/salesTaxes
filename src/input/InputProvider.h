@@ -2,7 +2,7 @@
 	File        : InputProvider.h
 	Date        : 16/11/2020
 	Author      : Federico Coppo
-	Description : Input provider class header
+	Description : InputProvider class header
 *******************************************************************************/
 
 #ifndef INPUTPROVIDER_H_
@@ -36,7 +36,7 @@ private:
 	void hardCodedWrongInputCreate();
 	bool fileInputReader (const char * path);
 	bool fileCatVocabularyReader (const char * path);
-	bool getNoteCategory(string note, ShoppingNote::productCategory * cat);
+	bool searchNoteCategory(string note, ShoppingNote::productCategory * cat);
 	void clearShoppingSheet(ShoppingSheetList * p_list);
 	static string convertStringToUpper(string s);
 

@@ -2,7 +2,7 @@
 	File        : ShoppingSheetList.cpp
 	Date        : 14/11/2020
 	Author      : Federico Coppo
-	Description : Shopping Sheet List class:
+	Description : ShoppingSheetList class:
 				  metaphorically it represents the shopping paper list
 *******************************************************************************/
 
@@ -31,14 +31,14 @@ void ShoppingSheetList::AddShoppingNoteToList(ShoppingNote * pt)
 	}
 }
 
-// Remove all note from shopping list
+// Remove all notes from shopping list
 void ShoppingSheetList::ClearNoteFromShoppingList()
 {
 	noteList.clear();
 }
 
 
-// Get Note from the shopping list
+// Get note from the shopping list
 ShoppingNote * ShoppingSheetList::GetShoppingNote(int idx)
 {
 	if (idx < GetShoppingNoteListSize())

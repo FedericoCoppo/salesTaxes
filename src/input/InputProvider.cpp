@@ -2,8 +2,8 @@
 	File        : InputProvider.cpp
 	Date        : 16/11/2020
 	Author      : Federico Coppo
-	Description : Input Provider class:
-				  it provide input to application
+	Description : InputProvider class:
+				  it provides input to application
 *******************************************************************************/
 
 // Include
@@ -22,16 +22,19 @@ const bool InputProvider::WrongHardCodedInput = false;
 // Constructor
 InputProvider::InputProvider()
 {
-	// default source is hard coded
+	// Default source is hard coded
 	source = InputSource::hardCoded;
 	isInputCreated = false;
 	isCategoryVocabularyOpened = false;
+
+	// Container for the input
 	p_shopSheetList = new ShoppingSheetList();
 }
 
 // Destructor
 InputProvider::~InputProvider(void)
 {
+	// Free the memory
 	clearShoppingSheet(p_shopSheetList);
 
 	if (p_shopSheetList)
@@ -41,10 +44,12 @@ InputProvider::~InputProvider(void)
 	}
 }
 
-// Free the memory of ShoppingNotes list's nodes
+// Remove all list's nodes (ShoppingNote)
 void InputProvider::clearShoppingSheet(ShoppingSheetList * p_list)
 {
 	int max = p_list->GetShoppingNoteListSize();
+
+	// Clear the list's nodes
 	for (int i = 0; i < max; i++)
 	{
 		ShoppingNote * p_note = p_list->GetShoppingNote(i);
@@ -55,11 +60,12 @@ void InputProvider::clearShoppingSheet(ShoppingSheetList * p_list)
 		}
 	}
 
+	// Clear the list object
 	p_list->ClearNoteFromShoppingList();
 }
 
-// Get the category from note using vocabulary map
-bool InputProvider::getNoteCategory(string note, ShoppingNote::productCategory * cat)
+// Get the category from note using the vocabulary map
+bool InputProvider::searchNoteCategory(string note, ShoppingNote::productCategory * cat)
 {
 	bool success = false;
 	bool found = false;
@@ -67,19 +73,19 @@ bool InputProvider::getNoteCategory(string note, ShoppingNote::productCategory *
 	// Default value for unknown categories
 	*cat = ShoppingNote::productCategory::genericProduct;
 
-	// Avoid creating notes without the vocabulary
+	// Avoid creating notes without the vocabulary file
 	if (isCategoryVocabularyOpened)
 	{
 		string chunk;
 		string categoryStr;
 		std::stringstream test(note);
 
-		// For each chunk check if present in the vocabulary
+		// For each chunk check if present in the vocabulary map
 		while(std::getline(test, chunk, ' '))
 		{
 		    if (MapProductCategory.find(chunk) != MapProductCategory.end())
 		    {
-		        // if found, get the string value
+		        // If found, get the category
 		        categoryStr = MapProductCategory[chunk];
 		        found = true;
 		        break;
@@ -88,7 +94,7 @@ bool InputProvider::getNoteCategory(string note, ShoppingNote::productCategory *
 
 		if (found)
 		{
-			// Convert string value into category enum
+			// Convert string value into category type
 			if (categoryStr == "BOOK")
 			{
 				*cat = ShoppingNote::productCategory::book;
@@ -128,10 +134,10 @@ bool InputProvider::fileInputReader (const char * path)
 		{
 			ShoppingNote::productCategory catTmp;
 
-			// Get the category from vocabulary
-			if (getNoteCategory(note, &catTmp))
+			// Search category in the map
+			if (searchNoteCategory(note, &catTmp))
 			{
-				// Create the new note and push into list
+				// Create the new note and push it into list
 				p_shopSheetList->AddShoppingNoteToList(new ShoppingNote(note, catTmp));
 			}
 		}
@@ -224,15 +230,16 @@ ShoppingSheetList * InputProvider::InputCreate(InputSource inSource, const char 
 		}
 		else if (inSource == InputSource::file)
 		{
-			// Read the vocabulary
 			if (vocabPath != NULL)
 			{
+				// Read vocabulary
 				if (fileCatVocabularyReader(vocabPath))
 				{
 					isCategoryVocabularyOpened = true;
 
 					if (inputPath != NULL)
 					{
+						// Read input
 						if (fileInputReader(inputPath))
 						{
 							isInputCreated = true;
@@ -250,7 +257,7 @@ ShoppingSheetList * InputProvider::InputCreate(InputSource inSource, const char 
 // Hard coded input data creation
 void InputProvider::hardCodedInputCreate()
 {
-	// switch test input
+	// Switch test input
 	if (UserTestID == 1)
 	{
 		p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("2 book at 12.49", ShoppingNote::productCategory::book));
@@ -287,6 +294,7 @@ void InputProvider::hardCodedWrongInputCreate()
 	p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("1 cake at 2", ShoppingNote::productCategory::food));
 	p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("1 milk at 1.", ShoppingNote::productCategory::food));
 	p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("1 coke at .2", ShoppingNote::productCategory::food));
+
 	// Bad input
 	p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("2x coffè at 1.25", ShoppingNote::productCategory::food));
 	p_shopSheetList->AddShoppingNoteToList(new ShoppingNote("x2 chocolate bar at 1.25", ShoppingNote::productCategory::food));
@@ -300,7 +308,6 @@ void InputProvider::hardCodedWrongInputCreate()
 // Convert a string into corresponding upper case string
 string InputProvider::convertStringToUpper(string s)
 {
-	// convert string to back to lower case
 	std::for_each(s.begin(), s.end(), [](char & c){
 		c = ::toupper(c);
 	});

@@ -2,8 +2,9 @@
 	File        : ShoppingNote.cpp
 	Date        : 14/11/2020
 	Author      : Federico Coppo
-	Description : Shopping Note class:
+	Description : ShoppingNote class:
 				  metaphorically a shopping note is an item of a shopping list
+				  that contains product info string and category
 *******************************************************************************/
 
 // Include

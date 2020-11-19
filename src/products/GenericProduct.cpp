@@ -3,7 +3,7 @@
 	Date        : 13/11/2020
 	Author      : Federico Coppo
 	Description : GenericProduct class:
-				  it represent the store product with all purchase information
+				  it represent the product with all purchase information
 *******************************************************************************/
 
 // Include
@@ -22,7 +22,7 @@ GenericProduct::GenericProduct(string prodName, int prodQuantity, float prodPric
 	isImported = false;
 	isBasicSalesTaxed = true;
 
-	// mark as additional input duty
+	// Mark as additional input duty
 	if (GetName().find("imported") != std::string::npos)
 	{
 		isImported = true;
@@ -35,10 +35,13 @@ GenericProduct::~GenericProduct(void)
 
 }
 
-// sales tax calculation routine
+// Sales tax calculation routine
 float GenericProduct::CalculateTaxes()
 {
+	// Calculate product taxes
 	productTax.CalculateTaxes(this);
+
+	// Calculate the taxed price
 	priceTaxed = priceRaw*quantity + productTax.GetTax();
 
 	return productTax.GetTax();

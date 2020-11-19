@@ -59,7 +59,7 @@ Application::~Application(void)
 	}
 }
 
-// Fill the buffer with products converted from shopping list
+// Fill the basket with products from shopping list
 void Application::FillBasketFromShoppingList(ShoppingSheetList *p_shopList, Basket * p_basket)
 {
 	ShoppingNote * p_shopNoteTmp;
@@ -78,15 +78,14 @@ void Application::FillBasketFromShoppingList(ShoppingSheetList *p_shopList, Bask
 
 		if (p_shopNoteTmp && p_basket)
 		{
-			// Validate the note before creating a new product
 			string prodName;
 			int prodNum = 0;
 			float prodPrice = 0.0;
 
-			// Validate the note, then add the product to basket
+			// Validate the note before creating a new product
 			if (validateShoppingNote(p_shopNoteTmp->GetShoppingNoteString(), &prodNum, &prodName, &prodPrice))
 			{
-				// Vonvert the note into product
+				// Convert the note into product
 				switch (p_shopNoteTmp->GetShoppingNoteCategory())
 				{
 				case ShoppingNote::productCategory::book:
@@ -103,6 +102,7 @@ void Application::FillBasketFromShoppingList(ShoppingSheetList *p_shopList, Bask
 					break;
 				}
 
+				// Add product to the basket
 				p_basket->AddProductToBasket(p_productTmp);
 			}
 			else
@@ -163,7 +163,7 @@ bool Application::validateShoppingNote(string s, int * p_number, string * p_name
 		s = s.erase(0, numStr.length() + 1);
 		string nameStr = s.substr(0, s.find(" at "));
 
-		// avoid too little input name
+		// Avoid too little input name
 		if (nameStr.length() < Application::ProducNameCharacterMin)
 		{
 			res = false;
@@ -210,7 +210,7 @@ bool Application::isValidProductNumber(const std::string &s)
 	return( strspn( s.c_str(), "0123456789" ) == s.size() );
 }
 
-// Routine to check if string is a number valid for price
+// Routine to check if string is a valid price
 bool Application::isValidPrice(const std::string &s)
 {
 	// "1." are valid for 1.0; ".5" is valid for 0.5

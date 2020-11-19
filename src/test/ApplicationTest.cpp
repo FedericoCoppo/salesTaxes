@@ -2,7 +2,7 @@
 	File        : ApplicationTest.cpp
 	Date        : 13/11/2020
 	Author      : Federico Coppo
-	Description : Test Application
+	Description : TestApplication
 				  it create and test Application
 *******************************************************************************/
 
@@ -34,7 +34,7 @@ ApplicationTest::~ApplicationTest(void)
 // Clear memory
 void ApplicationTest::clearApplicationTest()
 {
-	// clear the heap
+	// free the heap
 	if (p_app != NULL)
 	{
 		delete p_app;
@@ -122,7 +122,7 @@ void ApplicationTest::testDifferentInputSource(int testCnt)
 }
 
 // Check that all product object has been correctly added in the basket
-void ApplicationTest::testDataStruct()
+void ApplicationTest::testDataStructCoherence()
 {
 	int productObj = p_shopSheetList->GetShoppingNoteListSize() - p_app->GetDiscardedNotesCnt();
 	assert (p_basket->GetBasketSize() == productObj);
@@ -134,9 +134,9 @@ void ApplicationTest::testCalculatedTaxesValues()
 	for (int i = 0; i < p_basket->GetBasketSize(); i++)
 	{
 		GenericProduct * p = p_basket->GetProduct(i);
-		p->CalculateTaxes();
 
-		// test for multiple taxes calculation on same product
+		// Erroneous multiple taxes calculation on same product should not cause error
+		p->CalculateTaxes();
 		p->CalculateTaxes();
 
 		// Check if imported products are marked (like in the unit test but here the product come from basket)
@@ -149,7 +149,7 @@ void ApplicationTest::testCalculatedTaxesValues()
 			assert(p->GetIsImported() == false);
 		}
 
-		// Check taxes calculation value
+		// Check price (free products must not be in the basket)
 		assert(p->GetPrice() > 0.0);
 
 		// Test taxes
@@ -181,7 +181,7 @@ void ApplicationTest::testCalculatedTaxesValues()
 		// Consider the number of that product
 		testTax *= p->GetQuantity();
 
-		// Compare test calculated with the specific product tax field calculated
+		// Compare test calculated with the specific product tax calculation
 		assert( ( int (p->GetTaxesValue()*100) == int (testTax*100) ));
 	}
 }
@@ -200,7 +200,7 @@ void ApplicationTest::testReceipt()
 		}
 	}
 
-	// Receipt test
+	// Calculate receipt
 	p_app->GetReceipt()->CalculateReceipt();
 
 	// Test receipt amount
@@ -228,7 +228,7 @@ void ApplicationTest::testProduct(void)
 	p_testProd = new GenericProduct("testProduct imported", prodNum, initPrice);
 	p_testFood = new Food("testProduct", prodNum, initPrice);
 
-	// Check the attribute
+	// Check the attributes
 	assert ( p_testProd->GetQuantity() == prodNum);
 	assert ( p_testProd->GetPrice( ) == initPrice);
 
@@ -270,16 +270,18 @@ void ApplicationTest::testShoppingSheetList()
 	// Check that notes are pushed inside the list
 	assert(p_shopSheetList->GetShoppingNoteListSize() == 2);
 
+	// Test the correctness of memory cleaning methods:
+
 	// Free memory
 	p_shopSheetList->ClearNoteFromShoppingList();
 
-	// Check the list is empty
+	// Check the list is now empty
 	assert(p_shopSheetList->GetShoppingNoteListSize() == 0);
 
 	delete p_shopSheetList;
 }
 
-// Test configurator
+// Configure the test
 void ApplicationTest::configureTest(int testCnt)
 {
 	testDifferentInputSource(testCnt);
@@ -310,7 +312,7 @@ void ApplicationTest::Test(void)
 		configureTest(i + 1);
 
 		// Functional Test
-		testDataStruct();
+		testDataStructCoherence();
 		testCalculatedTaxesValues();
 		testReceipt();
 

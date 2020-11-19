@@ -3,7 +3,7 @@
 	Date        : 13/11/2020
 	Author      : Federico Coppo
 	Description : Basket class:
-				  it represents a shopping card ready for receipt
+				  it represents a shopping card ready for the receipt
 *******************************************************************************/
 
 // Include
@@ -18,7 +18,7 @@ Basket::Basket(string nameStr)
 // Destructor
 Basket::~Basket(void)
 {
-	// Clear the list if not already done by user
+	// Clear the basket list
 	productList.clear();
 }
 
@@ -31,13 +31,13 @@ void Basket::AddProductToBasket(GenericProduct * pt)
 	}
 }
 
-// Remove all product from basket
+// Clear the basket list
 void Basket::ClearProductFromBasket()
 {
 	productList.clear();
 }
 
-// Get product at specific index
+// Get the product at specific index
 GenericProduct * Basket::GetProduct (int idx)
 {
 	if (idx < GetBasketSize())

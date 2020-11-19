@@ -10,7 +10,7 @@
 
 class GenericProduct;
 
-// Class that implement a Tax
+// Class that implement the tax
 class Tax
 {
 public:
@@ -27,7 +27,7 @@ private:
 	float taxPct;
 	bool isTaxesCalculated;
 
-	// Static attribute
+	// Taxes percentage
 	static const float importedTaxPercentage;
 	static const float basedSalesTaxPercentage;
 };

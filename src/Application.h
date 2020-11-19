@@ -3,8 +3,7 @@
 	Date        : 13/11/2020
 	Author      : Federico Coppo
 	Description : Application header
-				  Application represent the user that convert the shopping notes
-				  into products and fill the basket
+				  it represent the user that makes purchases.
  *******************************************************************************/
 
 #ifndef APPLICATION_H_
@@ -22,7 +21,7 @@
 #include "ShoppingSheetList.h"
 #include "InputProvider.h"
 
-// Class that implement the Application
+// Class that implement the application
 class Application
 {
 public:
@@ -45,12 +44,6 @@ private:
 	bool isValidProductNumber(const std::string &s);
 	bool isValidPrice(const std::string &s);
 
-	// Max product number allowed as input
-	static const int ProductNumberMax;
-
-	// Minimum digit allowed for product name as input
-	static const int ProducNameCharacterMin;
-
 	// Wrong input notes counter
 	int discardedNotesCnt;
 
@@ -65,6 +58,12 @@ private:
 
 	// Receipt
 	Receipt * p_receipt;
+
+	// Max product number allowed as input
+	static const int ProductNumberMax;
+
+	// Minimum digit allowed for product name as input
+	static const int ProducNameCharacterMin;
 };
 
 #endif /* APPLICATION_H_ */

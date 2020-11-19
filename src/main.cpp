@@ -2,7 +2,7 @@
 	File        : main.cpp
 	Date        : 13/11/2020
 	Author      : Federico Coppo
-	Description : Main routine
+	Description : main routine
  *******************************************************************************/
 
 // Include

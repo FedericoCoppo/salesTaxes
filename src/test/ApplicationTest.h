@@ -2,7 +2,7 @@
 	File        : TestApplication.h
 	Date        : 13/11/2020
 	Author      : Federico Coppo
-	Description : Test Application header
+	Description : TestApplication header
 *******************************************************************************/
 
 #ifndef TEST_APPLICATIONTEST_H_
@@ -25,7 +25,7 @@ public:
 private:
 	void testProduct();
 	void testShoppingSheetList();
-	void testDataStruct();
+	void testDataStructCoherence();
 	void testCalculatedTaxesValues();
 	void testReceipt();
 	void testDifferentInputSource(int testCnt);

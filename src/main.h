@@ -2,7 +2,7 @@
 	File        : main.h
 	Date        : 13/11/2020
 	Author      : Federico Coppo
-	Description : Main header
+	Description : main header
 *******************************************************************************/
 
 #ifndef MAIN_H_

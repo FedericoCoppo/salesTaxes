@@ -18,7 +18,7 @@ class ShoppingNote
 {
 public:
 
-	// Product type for basics sales tax category
+	// Note type for basics sales tax category
 	typedef enum
 	{
 		book,

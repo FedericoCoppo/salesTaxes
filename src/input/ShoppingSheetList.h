@@ -13,7 +13,7 @@
 #include <list>
 #include "ShoppingNote.h"
 
-// Class to manage list of Notes
+// Class to manage list of shopping notes
 class ShoppingSheetList
 {
 public:

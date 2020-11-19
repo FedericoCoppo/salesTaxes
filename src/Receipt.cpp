@@ -2,7 +2,7 @@
 	File        : Receipt.cpp
 	Date        : 13/11/2020
 	Author      : Federico Coppo
-	Description : Receipt generator class:
+	Description : Receipt class:
 				  it calculate and print the receipt
 *******************************************************************************/
 
@@ -24,7 +24,7 @@ Receipt::Receipt(Basket * pt_basket)
 // Destructor
 Receipt::~Receipt(void)
 {
-	p_basket = NULL;
+
 }
 
 // Calculate total cost and cumulative taxes

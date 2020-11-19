@@ -2,7 +2,7 @@
 	File        : Receipt.h
 	Date        : 13/11/2020
 	Author      : Federico Coppo
-	Description : Receipt generator class header
+	Description : Receipt class header
 *******************************************************************************/
 
 #ifndef RECEIPTGENERATOR_H_
@@ -11,7 +11,7 @@
 // Include
 #include "Basket.h"
 
-// Class that implement a Receipt
+// Class that implement a receipt
 class Receipt
 {
 public:

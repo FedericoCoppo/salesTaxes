@@ -13,6 +13,7 @@
 Book::Book(string name, int num, float price):
 GenericProduct(name, num, price)
 {
+	// Basic sales tax exempt product
 	isBasicSalesTaxed = false;
 }
 

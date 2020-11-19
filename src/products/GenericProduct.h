@@ -14,7 +14,7 @@ using namespace std;
 #include <string>
 #include "Tax.h"
 
-// Class that implement a Store Product
+// Class that implement a product
 class GenericProduct
 {
 public:
