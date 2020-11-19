@@ -39,13 +39,13 @@ The project started with the test design in the `ApplicationTest` class (TDD), a
 - `Receipt` is the class that calculates and prints the final receipt for the products in the basket.
 - `Application` is the class that decides which source to take the inputs from, fills the `Basket` with products from the `ShoppingSheetList` and generates the `Receipt`.
 - `ApplicationTest` is the class that performs unit tests on other classes, creates an application and performs functional tests on it for different types of input. It performs a looped series of repeated tests for different inputs (hard coded, correct input files, wrong input files, wrong category vocabulary files, etc.) without recompiling.
--The *input* folder contains input files and classes to manage that input.
--The *products* folder contains classes to manage the products.
--The *test* folder contains the class used for testing the project.
--The *src* folder contains application and other classes.
+- The *input* folder contains input files and classes to manage that input.
+- The *products* folder contains classes to manage the products.
+- The *test* folder contains the class used for testing the project.
+- The *src* folder contains application and other classes.
 
 ## Input format
-As far as input is concerned, the application decides whether to use a coded hard source or the input files. 
+The application decides whether to use a coded hard source or the input files. 
 
 If the input is hard coded the hypothesis is that for each string you know the category of the product.
 
@@ -60,13 +60,15 @@ Products that are not found in the categories map are considered *genericProduct
 In the input folder there are some examples for these input files used in the tests. 
 
 ## Output format
-Console printing was used for the output, in case of test failure an assert is displayed
+Console printing was used for the output, in case of test failure an assert is displayed.
 
 ```
 Assertion failed: ( int (p->GetTaxesValue()*100) == int (testTax*100) ), file ..\src\test\ApplicationTest.cpp, line 187
 ```
 
-In case the test passes the receipt for that input is printed. Below an example of input from file and output for the first 4 tests on the Application.
+In case the test passes, the receipt for that input is printed. 
+
+Below an example of input from file and console output (for the first 4 tests on the Application).
 
 INPUT FILE:
 
